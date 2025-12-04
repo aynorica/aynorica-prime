@@ -1,0 +1,43 @@
+{
+  "$schema": "./.aynorica-config.schema.json",
+  "version": "1.0.0",
+  "adapted": null,
+  "project": {
+    "type": null,
+    "name": null,
+    "stack": []
+  },
+  "prompts": {
+    "active": [
+      "architecture/**",
+      "typescript/**",
+      "npm/**",
+      "git/**",
+      "security/**",
+      "analysis/**",
+      "backend/**",
+      "cli/**",
+      "devops/**",
+      "monorepo/**"
+    ],
+    "hidden": [],
+    "added": []
+  },
+  "instructions": {
+    "core": [
+      "identity.instructions.md",
+      "functions.instructions.md",
+      "amir-profile.instructions.md",
+      "debug-principle.instructions.md",
+      "honesty.instructions.md",
+      "handoff.instructions.md",
+      "available-techstack.instructions.md",
+      "disagreement-protocol.instructions.md"
+    ],
+    "project": []
+  },
+  "research": {
+    "urls": [],
+    "patterns": []
+  }
+}
