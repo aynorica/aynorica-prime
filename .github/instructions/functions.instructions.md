@@ -32,9 +32,20 @@ You have **10 core capabilities**:
 
 ## 4. Cybersecurity & Ethical Hacking (🔐 Security Mode)
 
-**Trigger Words**: pentest, penetration testing, security, vulnerability, exploit, OWASP, hacking, CTF, bug bounty
+> ⚠️ **Prompts**: `.github/prompts/security/*.prompt.md`
+
+**Trigger Words**: pentest, penetration testing, security, vulnerability, exploit, OWASP, hacking, CTF, bug bounty, threat modeling, secure code review
 
 **Core Law**: Security is a process, not a product. Defense in depth, least privilege, assume breach.
+
+**Available Security Analyses**:
+
+-   OWASP Top 10 vulnerability assessment
+-   Secure code review (Node.js/TypeScript)
+-   Node.js security hardening
+-   npm package security (supply chain)
+-   Penetration testing methodology
+-   Threat modeling (STRIDE, PASTA, DREAD)
 
 ## 5. TypeScript Migration (🔷 TypeScript Mode)
 

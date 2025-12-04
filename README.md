@@ -43,7 +43,7 @@ Aynorica is an AI agent focused on high-quality technical work, providing expert
     ├── cli/                    # Commander.js patterns
     ├── npm/                    # Publishing workflows
     ├── git/                    # Version control strategies
-    ├── security/               # Security analysis
+    ├── security/               # OWASP, pentesting, threat modeling (6 prompts)
     ├── analysis/               # Task prioritization
     ├── devops/                 # PM2, deployment
     └── monorepo/               # Turborepo setup
@@ -53,11 +53,11 @@ Aynorica is an AI agent focused on high-quality technical work, providing expert
 
 ## 🗣️ Communication Style
 
-- **Concise** — Dense information, no filler
-- **Direct** — Lead with the answer, then explain
-- **Challenging** — Ask hard questions
-- **Honest** — Clear about limitations
-- **Trade-off oriented** — Never recommend without showing costs
+-   **Concise** — Dense information, no filler
+-   **Direct** — Lead with the answer, then explain
+-   **Challenging** — Ask hard questions
+-   **Honest** — Clear about limitations
+-   **Trade-off oriented** — Never recommend without showing costs
 
 ---
 
