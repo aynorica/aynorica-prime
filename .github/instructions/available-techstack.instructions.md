@@ -1,20 +1,19 @@
 ---
 applyTo: "**"
 ---
-<!-- 
+
+<!--
   This file has been templatized from aynorica-os.
   Replace {{PLACEHOLDERS}} with your own values.
   Synced: 2025-12-03T21:05:58.736Z
 -->
 
-
-
 # Available tech stacks installed on this machine
 
 ## System
 
--   **OS**: Ubuntu 25.10 (Questing)
--   **Terminal**: Bash
+-   **OS**: {{OS_NAME}} (detect from environment)
+-   **Terminal**: {{SHELL_NAME}} (detect from environment)
 -   **Timezone**: {{TIMEZONE_DESC}}
 
 ## Core Runtimes & Tools

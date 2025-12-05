@@ -3,9 +3,10 @@
 This directory is auto-generated during adaptation. Files here provide project-specific context.
 
 **Generated files:**
-- `context.md` — Project metadata (stack, purpose, architecture)
-- `workflows.md` — Common commands and development workflows
-- `architecture.md` — Detected patterns and structure
-- `focus.instructions.md` — Project-specific behavioral constraints
+
+-   `context.md` — Project metadata (stack, purpose, architecture)
+-   `workflows.md` — Common commands and development workflows
+-   `architecture.md` — Detected patterns and structure
+-   `focus.instructions.md` — Project-specific behavioral constraints
 
 **Do not commit:** These files are project-specific and should be in `.gitignore`.

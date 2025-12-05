@@ -20,27 +20,30 @@ pnpm dev
 ### Add New Component
 
 1. Create component directory:
-   ```bash
-   mkdir src/components/MyComponent
-   cd src/components/MyComponent
-   ```
+
+    ```bash
+    mkdir src/components/MyComponent
+    cd src/components/MyComponent
+    ```
 
 2. Create files:
-   ```bash
-   touch MyComponent.tsx MyComponent.types.ts MyComponent.test.tsx MyComponent.stories.tsx
-   ```
+
+    ```bash
+    touch MyComponent.tsx MyComponent.types.ts MyComponent.test.tsx MyComponent.stories.tsx
+    ```
 
 3. Export from barrel:
-   ```typescript
-   // src/index.ts
-   export { MyComponent } from './components/MyComponent/MyComponent';
-   export type { MyComponentProps } from './components/MyComponent/MyComponent.types';
-   ```
+
+    ```typescript
+    // src/index.ts
+    export { MyComponent } from "./components/MyComponent/MyComponent";
+    export type { MyComponentProps } from "./components/MyComponent/MyComponent.types";
+    ```
 
 4. Test locally:
-   ```bash
-   pnpm test MyComponent
-   ```
+    ```bash
+    pnpm test MyComponent
+    ```
 
 ---
 
@@ -141,6 +144,7 @@ pnpm build
 ```
 
 **Steps:**
+
 1. Clean `dist/`
 2. Run TypeScript compiler
 3. Bundle with Vite
@@ -149,6 +153,7 @@ pnpm build
 **Output:** `dist/` directory
 
 **Contents:**
+
 ```
 dist/
 ├── index.js          # ESM bundle
@@ -243,6 +248,7 @@ Cmd+Shift+P → "TypeScript: Restart TS Server"
 **Cause:** Different Node.js versions or missing environment variables
 
 **Fix:**
+
 ```bash
 nvm use 22  # Match CI Node version
 pnpm test
@@ -253,6 +259,7 @@ pnpm test
 **Cause:** TypeScript errors preventing build
 
 **Fix:**
+
 ```bash
 pnpm typecheck  # See errors
 # Fix errors
@@ -264,6 +271,7 @@ pnpm build
 **Cause:** Port conflict
 
 **Fix:**
+
 ```bash
 pnpm dev -- --port 6007
 ```
@@ -324,9 +332,9 @@ After adding new component, update README.md:
 ```markdown
 ## Components
 
-- `Button` - Accessible button with variants
-- `Input` - Form input with validation
-- `MyComponent` - [Description]  ← Add here
+-   `Button` - Accessible button with variants
+-   `Input` - Form input with validation
+-   `MyComponent` - [Description] ← Add here
 ```
 
 ### Generate API Docs
@@ -342,24 +350,28 @@ pnpm typedoc
 ## 🚢 Release Process
 
 1. **Create release branch:**
-   ```bash
-   git checkout -b release/v1.2.0
-   ```
+
+    ```bash
+    git checkout -b release/v1.2.0
+    ```
 
 2. **Update changelog:**
-   ```bash
-   echo "## v1.2.0\n- Added MyComponent\n- Fixed Button accessibility" >> CHANGELOG.md
-   ```
+
+    ```bash
+    echo "## v1.2.0\n- Added MyComponent\n- Fixed Button accessibility" >> CHANGELOG.md
+    ```
 
 3. **Version bump:**
-   ```bash
-   npm version minor  # Creates tag
-   ```
+
+    ```bash
+    npm version minor  # Creates tag
+    ```
 
 4. **Push:**
-   ```bash
-   git push origin release/v1.2.0 --tags
-   ```
+
+    ```bash
+    git push origin release/v1.2.0 --tags
+    ```
 
 5. **Create PR** → Merge → GitHub Actions auto-publishes
 

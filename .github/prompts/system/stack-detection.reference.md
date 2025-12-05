@@ -15,19 +15,21 @@ Reference patterns for project type classification during adaptation.
 ## 📦 React Library
 
 **Indicators:**
+
 ```json
 // package.json
 {
-  "peerDependencies": {
-    "react": "^18.0.0"
-  },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": ["dist"]
+	"peerDependencies": {
+		"react": "^18.0.0"
+	},
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": ["dist"]
 }
 ```
 
 **Directory Structure:**
+
 ```
 src/
 ├── components/
@@ -47,21 +49,23 @@ src/
 ## ⚛️ React Application
 
 **Indicators:**
+
 ```json
 // package.json
 {
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "vite build"
-  }
+	"dependencies": {
+		"react": "^18.3.1",
+		"react-dom": "^18.3.1"
+	},
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build"
+	}
 }
 ```
 
 **Directory Structure:**
+
 ```
 src/
 ├── App.tsx
@@ -80,21 +84,23 @@ src/
 ## ⏭️ Next.js Application
 
 **Indicators:**
+
 ```json
 // package.json
 {
-  "dependencies": {
-    "next": "^15.0.0",
-    "react": "^18.3.1"
-  },
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build"
-  }
+	"dependencies": {
+		"next": "^15.0.0",
+		"react": "^18.3.1"
+	},
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build"
+	}
 }
 ```
 
 **Directory Structure (App Router):**
+
 ```
 app/
 ├── layout.tsx
@@ -103,6 +109,7 @@ app/
 ```
 
 **Or (Pages Router):**
+
 ```
 pages/
 ├── _app.tsx
@@ -119,18 +126,20 @@ pages/
 ## 🦁 NestJS API
 
 **Indicators:**
+
 ```json
 // package.json
 {
-  "dependencies": {
-    "@nestjs/core": "^10.0.0",
-    "@nestjs/common": "^10.0.0",
-    "@nestjs/platform-express": "^10.0.0"
-  }
+	"dependencies": {
+		"@nestjs/core": "^10.0.0",
+		"@nestjs/common": "^10.0.0",
+		"@nestjs/platform-express": "^10.0.0"
+	}
 }
 ```
 
 **Directory Structure:**
+
 ```
 src/
 ├── app.module.ts
@@ -151,18 +160,20 @@ src/
 ## 🚀 Express/Fastify API
 
 **Indicators:**
+
 ```json
 // package.json
 {
-  "dependencies": {
-    "express": "^4.18.0",
-    // or
-    "fastify": "^4.0.0"
-  }
+	"dependencies": {
+		"express": "^4.18.0",
+		// or
+		"fastify": "^4.0.0"
+	}
 }
 ```
 
 **Directory Structure:**
+
 ```
 src/
 ├── server.ts
@@ -180,21 +191,23 @@ src/
 ## ⌨️ CLI Tool
 
 **Indicators:**
+
 ```json
 // package.json
 {
-  "bin": {
-    "my-cli": "./dist/cli.js"
-  },
-  "dependencies": {
-    "commander": "^11.0.0",
-    // or
-    "yargs": "^17.0.0"
-  }
+	"bin": {
+		"my-cli": "./dist/cli.js"
+	},
+	"dependencies": {
+		"commander": "^11.0.0",
+		// or
+		"yargs": "^17.0.0"
+	}
 }
 ```
 
 **Directory Structure:**
+
 ```
 src/
 ├── cli.ts
@@ -215,19 +228,21 @@ src/
 ## 📚 Node.js Library
 
 **Indicators:**
+
 ```json
 // package.json
 {
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "exports": {
-    ".": "./dist/index.js"
-  },
-  "dependencies": {}  // Minimal dependencies
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"exports": {
+		".": "./dist/index.js"
+	},
+	"dependencies": {} // Minimal dependencies
 }
 ```
 
 **Directory Structure:**
+
 ```
 src/
 ├── index.ts
@@ -244,34 +259,38 @@ src/
 ## 📦 Monorepo
 
 **Indicators:**
+
 ```yaml
 # pnpm-workspace.yaml
 packages:
-  - 'packages/*'
-  - 'apps/*'
+    - "packages/*"
+    - "apps/*"
 ```
 
 **Or:**
+
 ```json
 // turbo.json
 {
-  "pipeline": {
-    "build": {
-      "dependsOn": ["^build"]
-    }
-  }
+	"pipeline": {
+		"build": {
+			"dependsOn": ["^build"]
+		}
+	}
 }
 ```
 
 **Or:**
+
 ```json
 // lerna.json
 {
-  "packages": ["packages/*"]
+	"packages": ["packages/*"]
 }
 ```
 
 **Directory Structure:**
+
 ```
 packages/
 ├── package-a/
@@ -317,15 +336,17 @@ interface DetectionResult {
 ```
 
 **Resolution:**
-- Confidence < 60: Ask user for confirmation
-- Confidence 60-80: Proceed with note in context.md
-- Confidence > 80: Proceed automatically
+
+-   Confidence < 60: Ask user for confirmation
+-   Confidence 60-80: Proceed with note in context.md
+-   Confidence > 80: Proceed automatically
 
 ---
 
 ## 🧪 Testing Heuristics
 
 **Jest vs Vitest:**
+
 ```json
 // package.json
 {
@@ -337,6 +358,7 @@ interface DetectionResult {
 ```
 
 **Testing Library:**
+
 ```json
 {
   "devDependencies": {
@@ -347,6 +369,7 @@ interface DetectionResult {
 ```
 
 **E2E Testing:**
+
 ```json
 {
   "devDependencies": {
@@ -361,36 +384,40 @@ interface DetectionResult {
 ## 🎨 Styling Detection
 
 **CSS Modules:**
+
 ```typescript
 // Presence of *.module.css files
-import styles from './Button.module.css';
+import styles from "./Button.module.css";
 ```
 
 **Tailwind:**
+
 ```json
 // tailwind.config.js exists
 {
-  "devDependencies": {
-    "tailwindcss": "^3.0.0"
-  }
+	"devDependencies": {
+		"tailwindcss": "^3.0.0"
+	}
 }
 ```
 
 **Styled Components:**
+
 ```json
 {
-  "dependencies": {
-    "styled-components": "^6.0.0"
-  }
+	"dependencies": {
+		"styled-components": "^6.0.0"
+	}
 }
 ```
 
 **Emotion:**
+
 ```json
 {
-  "dependencies": {
-    "@emotion/react": "^11.0.0"
-  }
+	"dependencies": {
+		"@emotion/react": "^11.0.0"
+	}
 }
 ```
 
@@ -399,33 +426,37 @@ import styles from './Button.module.css';
 ## 🗄️ State Management
 
 **Redux:**
+
 ```json
 {
-  "dependencies": {
-    "@reduxjs/toolkit": "^2.0.0",
-    "react-redux": "^9.0.0"
-  }
+	"dependencies": {
+		"@reduxjs/toolkit": "^2.0.0",
+		"react-redux": "^9.0.0"
+	}
 }
 ```
 
 **Zustand:**
+
 ```json
 {
-  "dependencies": {
-    "zustand": "^4.0.0"
-  }
+	"dependencies": {
+		"zustand": "^4.0.0"
+	}
 }
 ```
 
 **Jotai:**
+
 ```json
 {
-  "dependencies": {
-    "jotai": "^2.0.0"
-  }
+	"dependencies": {
+		"jotai": "^2.0.0"
+	}
 }
 ```
 
 **Context API:**
-- No state library dependency
-- Check for `createContext` usage in codebase
+
+-   No state library dependency
+-   Check for `createContext` usage in codebase

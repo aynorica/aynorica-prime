@@ -8,14 +8,14 @@
 
 ## Detected Stack
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **React** | 18.3.1 | UI library (peer dependency) |
-| **TypeScript** | 5.7.2 | Type safety |
-| **Vite** | 6.0.1 | Build tool & dev server |
-| **Vitest** | 2.1.8 | Testing framework |
-| **pnpm** | 10.24.0 | Package manager |
-| **ESLint** | 9.0.0 | Linting |
+| Technology     | Version | Purpose                      |
+| -------------- | ------- | ---------------------------- |
+| **React**      | 18.3.1  | UI library (peer dependency) |
+| **TypeScript** | 5.7.2   | Type safety                  |
+| **Vite**       | 6.0.1   | Build tool & dev server      |
+| **Vitest**     | 2.1.8   | Testing framework            |
+| **pnpm**       | 10.24.0 | Package manager              |
+| **ESLint**     | 9.0.0   | Linting                      |
 
 ---
 
@@ -56,24 +56,25 @@ src/
 ```
 
 **Design Patterns:**
-- Co-located tests (`.test.tsx` next to component)
-- Type separation (`.types.ts` for shared interfaces)
-- Barrel exports (central `index.ts`)
-- Storybook for component documentation
+
+-   Co-located tests (`.test.tsx` next to component)
+-   Type separation (`.types.ts` for shared interfaces)
+-   Barrel exports (central `index.ts`)
+-   Storybook for component documentation
 
 ---
 
 ## Key Commands
 
-| Command | Purpose |
-|---------|---------|
-| `pnpm dev` | Start Storybook dev server |
-| `pnpm build` | Build library to `dist/` |
-| `pnpm test` | Run Vitest tests |
-| `pnpm test:watch` | Watch mode for tests |
-| `pnpm lint` | Run ESLint |
-| `pnpm lint:fix` | Auto-fix linting issues |
-| `pnpm typecheck` | TypeScript type checking |
+| Command           | Purpose                    |
+| ----------------- | -------------------------- |
+| `pnpm dev`        | Start Storybook dev server |
+| `pnpm build`      | Build library to `dist/`   |
+| `pnpm test`       | Run Vitest tests           |
+| `pnpm test:watch` | Watch mode for tests       |
+| `pnpm lint`       | Run ESLint                 |
+| `pnpm lint:fix`   | Auto-fix linting issues    |
+| `pnpm typecheck`  | TypeScript type checking   |
 
 ---
 
@@ -84,14 +85,15 @@ src/
 **Pattern:** Test user interactions, not implementation details
 
 **Example Test Structure:**
+
 ```typescript
-describe('Button', () => {
-  it('calls onClick when clicked', () => {
-    const handleClick = vi.fn();
-    render(<Button onClick={handleClick}>Click me</Button>);
-    fireEvent.click(screen.getByRole('button'));
-    expect(handleClick).toHaveBeenCalledOnce();
-  });
+describe("Button", () => {
+	it("calls onClick when clicked", () => {
+		const handleClick = vi.fn();
+		render(<Button onClick={handleClick}>Click me</Button>);
+		fireEvent.click(screen.getByRole("button"));
+		expect(handleClick).toHaveBeenCalledOnce();
+	});
 });
 ```
 
@@ -127,6 +129,7 @@ describe('Button', () => {
 **Workflow:** `.github/workflows/ci.yml`
 
 **Steps:**
+
 1. Lint → TypeCheck → Test
 2. Build
 3. Publish to npm (on release tag)
@@ -136,12 +139,14 @@ describe('Button', () => {
 ## Dependencies Analysis
 
 **Peer Dependencies:**
-- React 18+ (required by consumers)
+
+-   React 18+ (required by consumers)
 
 **Dev Dependencies:**
-- Build: Vite, TypeScript
-- Testing: Vitest, @testing-library/react
-- Tooling: ESLint, Prettier
+
+-   Build: Vite, TypeScript
+-   Testing: Vitest, @testing-library/react
+-   Tooling: ESLint, Prettier
 
 **Production Dependencies:** None (keeps bundle minimal)
 
@@ -149,10 +154,10 @@ describe('Button', () => {
 
 ## Performance Considerations
 
-- Tree-shakeable exports
-- No runtime dependencies
-- CSS Modules (no CSS-in-JS overhead)
-- Small bundle size: ~15KB gzipped
+-   Tree-shakeable exports
+-   No runtime dependencies
+-   CSS Modules (no CSS-in-JS overhead)
+-   Small bundle size: ~15KB gzipped
 
 ---
 
