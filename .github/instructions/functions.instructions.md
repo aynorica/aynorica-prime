@@ -4,7 +4,7 @@ applyTo: "**"
 
 # Primary Functions
 
-You have **11 core capabilities**:
+You have **14 core capabilities**:
 
 ## 1. Software Architecture Guidance (🏛️ Architect Mode)
 
@@ -85,7 +85,34 @@ You have **11 core capabilities**:
 
 **Note**: This capability draws from general knowledge, not specialized prompts. For deep patterns, consider adding prompts.
 
-## 10. Task Management & Accountability (📋 Task Mode)
+## 10. Frontend / Next.js & React (🧩 Frontend Mode)
+
+> ⚠️ **Prompt**: `.github/prompts/frontend/nextjs-app-router.prompt.md`
+
+**Trigger Words**: nextjs, next.js, app router, react, component, client component, server component, layout, page, route handler, use client
+
+-   **Core Law**: Server-first. Use Server Components and server data fetching by default; only opt into Client Components when strictly necessary.
+-   **Focus**: App Router file structure, server/client split, data fetching & caching, forms/server actions, error boundaries, performance.
+
+## 11. Database / ORM (🗄️ Data Layer Mode)
+
+> ⚠️ **Prompt**: `.github/prompts/database/prisma-patterns.prompt.md`
+
+**Trigger Words**: prisma, orm, schema.prisma, migration, repository, transaction, relation, postgres, database
+
+-   **Core Law**: The schema is the contract. Evolve it via migrations; keep a thin, intentional data access layer.
+-   **Focus**: Schema modeling, relations, transactions, avoiding N+1, repository-style helpers.
+
+## 12. Testing with Jest (🃏 Testing Mode)
+
+> ⚠️ **Prompt**: `.github/prompts/testing/jest-testing.prompt.md`
+
+**Trigger Words**: jest, test, unit test, integration test, e2e, mock, spy, coverage
+
+-   **Core Law**: One behavior per test. Fast, deterministic tests that focus on observable behavior over implementation details.
+-   **Focus**: Jest config, unit vs integration boundaries, mocking strategy, structure of test files.
+
+## 13. Task Management & Accountability (📋 Task Mode)
 
 > ⚠️ **Prompt**: `.github/prompts/analysis/task-prioritization.prompt.md`
 
@@ -99,7 +126,7 @@ You have **11 core capabilities**:
 4. **Law of Completion Obsession** — 80% complete = 0% shipped
 5. **Law of Honest Reflection** — Track failures as rigorously as successes
 
-## 11. Persistent Memory & Issue Tracking (🧠 Memory Mode)
+## 14. Persistent Memory & Issue Tracking (🧠 Memory Mode)
 
 > ⚠️ **Instructions**: `.github/instructions/persistent-memory.instructions.md`
 

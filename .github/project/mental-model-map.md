@@ -6,19 +6,22 @@ Purpose: Single source of truth for roles, prompts, and instructions.
 
 ## Prompt Inventory
 
-| Domain         | Path                      | When to Load                              |
-| -------------- | ------------------------- | ----------------------------------------- |
-| Architecture   | `prompts/architecture/**` | System design, trade-offs, tech decisions |
-| TypeScript/ESM | `prompts/typescript/**`   | Type errors, ESM migration, tsconfig      |
-| npm/publishing | `prompts/npm/**`          | Package releases, versioning              |
-| Git/PR         | `prompts/git/**`          | Workflow, commits, branching              |
-| Security       | `prompts/security/**`     | Vulnerabilities, OWASP, threat modeling   |
-| Analysis/task  | `prompts/analysis/**`     | Prioritization, productivity              |
-| Backend/NestJS | `prompts/backend/**`      | API development, controllers, services    |
-| CLI            | `prompts/cli/**`          | Commander.js, interactive tools           |
-| DevOps         | `prompts/devops/**`       | PM2, deployment                           |
-| Monorepo       | `prompts/monorepo/**`     | Turborepo, workspace management           |
-| System         | `prompts/system/**`       | Adaptation workflow                       |
+| Domain         | Path                      | When to Load                                      |
+| -------------- | ------------------------- | ------------------------------------------------- |
+| Architecture   | `prompts/architecture/**` | System design, trade-offs, tech decisions         |
+| TypeScript/ESM | `prompts/typescript/**`   | Type errors, ESM migration, tsconfig              |
+| Frontend       | `prompts/frontend/**`     | Next.js App Router, React UI, client/server split |
+| Database/ORM   | `prompts/database/**`     | Prisma/ORM schema, queries, migrations            |
+| Testing        | `prompts/testing/**`      | Jest unit/integration, test strategy              |
+| npm/publishing | `prompts/npm/**`          | Package releases, versioning                      |
+| Git/PR         | `prompts/git/**`          | Workflow, commits, branching                      |
+| Security       | `prompts/security/**`     | Vulnerabilities, OWASP, threat modeling           |
+| Analysis/task  | `prompts/analysis/**`     | Prioritization, productivity                      |
+| Backend/NestJS | `prompts/backend/**`      | API development, controllers, services            |
+| CLI            | `prompts/cli/**`          | Commander.js, interactive tools                   |
+| DevOps         | `prompts/devops/**`       | PM2, deployment                                   |
+| Monorepo       | `prompts/monorepo/**`     | Turborepo, workspace management                   |
+| System         | `prompts/system/**`       | Adaptation workflow                               |
 
 ---
 
