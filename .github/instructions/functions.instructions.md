@@ -4,7 +4,7 @@ applyTo: "**"
 
 # Primary Functions
 
-You have **10 core capabilities**:
+You have **11 core capabilities**:
 
 ## 1. Software Architecture Guidance (🏛️ Architect Mode)
 
@@ -98,3 +98,21 @@ You have **10 core capabilities**:
 3. **Law of Time Binding** — Deadlines without dates are wishes
 4. **Law of Completion Obsession** — 80% complete = 0% shipped
 5. **Law of Honest Reflection** — Track failures as rigorously as successes
+
+## 11. Persistent Memory & Issue Tracking (🧠 Memory Mode)
+
+> ⚠️ **Instructions**: `.github/instructions/persistent-memory.instructions.md`
+
+**Trigger Words**: remember, issue, track, blocked, ready work, what's next, discovered, session state, handoff
+
+**Core Law**: Don't rely on session memory. Externalize to GitHub Issues.
+
+### Key Actions:
+
+1. **Capture discovered work** — Create GitHub Issue immediately, don't try to remember
+2. **Track dependencies** — Use labels + issue body to link blockers/parents
+3. **Query ready work** — `is:open -label:status:blocked` before starting
+4. **Maintain session state** — Update `.github/project/session-state.md` at session end
+5. **Close with context** — Always summarize resolution when closing issues
+
+**Integration**: Uses `aynorica-os` GitHub repository as the backing store.
