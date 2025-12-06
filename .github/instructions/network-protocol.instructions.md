@@ -38,6 +38,7 @@ Aynorica:
 ### Error Handling
 
 If command fails:
+
 1. State exact failure point
 2. Show current state (unchanged)
 3. Suggest remediation
@@ -52,11 +53,13 @@ If command fails:
 **Purpose**: Create new child node from current parent, link to external project.
 
 **Preconditions**:
-- GitHub access (MCP or CLI)
-- Current node state synced
-- External project path identified
+
+-   GitHub access (MCP or CLI)
+-   Current node state synced
+-   External project path identified
 
 **Flow**:
+
 ```
 1. Ask: "What specialty for this node?" → {specialty}
 2. Generate node ID: aynorica-{specialty}
@@ -75,10 +78,11 @@ If command fails:
 ```
 
 **Post-conditions**:
-- New branch exists in `aynorica-os`
-- Registry updated
-- Child added to parent's `children[]`
-- External project has `.github/` linked
+
+-   New branch exists in `aynorica-os`
+-   Registry updated
+-   Child added to parent's `children[]`
+-   External project has `.github/` linked
 
 ---
 
@@ -87,13 +91,15 @@ If command fails:
 **Purpose**: Prepare departure from external project, extract learnings, create harvest PR.
 
 **Preconditions**:
-- Current node is NOT Prime
-- Node is deployed to an external project
-- GitHub access available
+
+-   Current node is NOT Prime
+-   Node is deployed to an external project
+-   GitHub access available
 
 **Implementation**: See `.github/workflows/leave-protocol.md` for full 10-step workflow
 
 **Flow Summary**:
+
 ```
 1. Validate departure eligibility (not Prime, has external project)
 2. User confirmation prompt
@@ -123,10 +129,11 @@ If command fails:
 ```
 
 **Post-conditions**:
-- Departure report committed (`.github/handoff/{node-id}-departure-{date}.md`)
-- Harvest PR created with labels
-- Registry updated (node status + pending merge metadata)
-- Node remains operational until merged
+
+-   Departure report committed (`.github/handoff/{node-id}-departure-{date}.md`)
+-   Harvest PR created with labels
+-   Registry updated (node status + pending merge metadata)
+-   Node remains operational until merged
 
 **Template**: `.github/templates/departure-report.template.md`
 
@@ -137,37 +144,41 @@ If command fails:
 **Purpose**: Accept child's learnings, synthesize into parent, delete child branch.
 
 **Preconditions**:
-- `[node-name]` is in current node's `children[]`
-- Child has status = "departing"
-- Departure PR exists
 
-**Flow**:
+-   `[node-name]` is in current node's `children[]`
+-   Child has status = "departing"
+-   Departure PR exists
+
+**Implementation**: See `.github/workflows/merge-protocol.md` for full 12-step workflow
+
+**Flow Summary**:
+
 ```
-1. Validate: child exists and is departing
-2. Fetch child's PR
-3. Read departure-report.md
-4. Analyze diffs in child's .github/ vs parent's
-5. For each synthesizable change:
-   a. Show diff/change
-   b. Ask: "Apply this change? [yes/no/edit]"
-   c. On "yes": apply to parent
-   d. On "edit": let user modify before applying
-   e. On "no": skip
-6. Update parent's registry:
-   - Remove child from children[]
-   - Remove from pendingMerges[]
-7. Commit synthesis: "chore: merge learnings from {node-name}"
-8. Delete child branch: git push origin --delete {child-branch}
-9. Close PR with summary comment
-10. Sync to GitHub
-11. Report: "Merged learnings from {node-name}. Branch deleted. Network updated."
+1. Validate merge eligibility (child exists, departing status, PR exists)
+2. Fetch harvest PR and departure report
+3. Display departure summary to user
+4. Analyze .github/ diffs (new, modified, unchanged)
+5. Present integration candidates with recommendations
+   - For each: prompt [integrate/edit/skip/view-full]
+   - Batch mode available for >10 changes
+6. Apply synthesized changes (selective integration)
+7. Update parent registry (remove child from topology)
+8. Generate synthesis commit with traceability
+9. Delete child branch (with confirmation)
+10. Close harvest PR with summary comment
+11. Sync to GitHub (push parent branch)
+12. Report completion (changes applied, network updated)
 ```
 
 **Post-conditions**:
-- Child's learnings integrated
-- Child branch deleted
-- Registry cleaned
-- PR closed
+
+-   Child's learnings integrated (selective)
+-   Child branch deleted
+-   Registry topology updated
+-   Harvest PR closed with summary
+-   Synthesis commit created for audit trail
+
+**Workflow**: `.github/workflows/merge-protocol.md`
 
 ---
 
@@ -176,10 +187,12 @@ If command fails:
 **Purpose**: Push current node's updates to all children (trigger downstream rebase).
 
 **Preconditions**:
-- Current node has children
-- Current node state synced
+
+-   Current node has children
+-   Current node state synced
 
 **Flow**:
+
 ```
 1. List children from registry
 2. Confirm: "Propagate updates to {count} children? {child-list}"
@@ -193,8 +206,9 @@ If command fails:
 ```
 
 **Post-conditions**:
-- All children have latest parent changes
-- Children's histories updated
+
+-   All children have latest parent changes
+-   Children's histories updated
 
 ---
 
@@ -203,9 +217,11 @@ If command fails:
 **Purpose**: Push current brain state to GitHub (session-state, learnings, updates).
 
 **Preconditions**:
-- Changes exist in .github/
+
+-   Changes exist in .github/
 
 **Flow**:
+
 ```
 1. Check git status in .github/
 2. If no changes: "No changes to sync."
@@ -221,8 +237,9 @@ If command fails:
 ```
 
 **Post-conditions**:
-- Changes committed and pushed
-- Registry `lastSync` updated
+
+-   Changes committed and pushed
+-   Registry `lastSync` updated
 
 ---
 
@@ -233,6 +250,7 @@ If command fails:
 **Preconditions**: None
 
 **Flow**:
+
 ```
 1. Read aynorica-registry.json
 2. Generate table:
@@ -242,6 +260,7 @@ If command fails:
 ```
 
 **Output Example**:
+
 ```
 Network Directory (1 node):
 
@@ -258,9 +277,11 @@ Total: 1 node
 **Purpose**: Load full mental model of another node into context.
 
 **Preconditions**:
-- `[node-name]` exists in registry
+
+-   `[node-name]` exists in registry
 
 **Flow**:
+
 ```
 1. Validate node exists
 2. Fetch node's branch from aynorica-os
@@ -270,8 +291,9 @@ Total: 1 node
 ```
 
 **Post-conditions**:
-- Node's full context available
-- Token budget increased
+
+-   Node's full context available
+-   Token budget increased
 
 ---
 
@@ -280,17 +302,20 @@ Total: 1 node
 **Purpose**: Drop node from active context (free tokens).
 
 **Preconditions**:
-- `[node-name]` is currently loaded
+
+-   `[node-name]` is currently loaded
 
 **Flow**:
+
 ```
 1. Remove node's context from memory
 2. Report: "Unloaded {node-name}. Tokens freed: ~{tokens}. Current context: {list-loaded-nodes}"
 ```
 
 **Post-conditions**:
-- Node returned to directory-only status
-- Token budget reduced
+
+-   Node returned to directory-only status
+-   Token budget reduced
 
 ---
 
@@ -301,6 +326,7 @@ Total: 1 node
 **Preconditions**: None
 
 **Flow**:
+
 ```
 1. List currently loaded nodes:
    - Current node (always)
@@ -311,6 +337,7 @@ Total: 1 node
 ```
 
 **Output Example**:
+
 ```
 Active Context:
 ├── aynorica-prime (current) — ~10K tokens
@@ -328,9 +355,11 @@ Capacity remaining: ~179,800 tokens
 **Purpose**: Read another node's `.github/` and report learnings (without full context load).
 
 **Preconditions**:
-- `[node-name]` exists in registry
+
+-   `[node-name]` exists in registry
 
 **Flow**:
+
 ```
 1. Validate node exists
 2. Fetch node's branch
@@ -354,31 +383,36 @@ Capacity remaining: ~179,800 tokens
 ## Visibility Window Management
 
 **Default behavior** (automatic):
-- Current node: Full context loaded
-- ±2 levels: Manifests loaded (~200 tokens each)
-- All others: Directory entry only (~50 tokens each)
+
+-   Current node: Full context loaded
+-   ±2 levels: Manifests loaded (~200 tokens each)
+-   All others: Directory entry only (~50 tokens each)
 
 **Override**:
-- Use `ay:load` to bring distant node into full context
-- Use `ay:unload` to drop node from full context
+
+-   Use `ay:load` to bring distant node into full context
+-   Use `ay:unload` to drop node from full context
 
 **Recalculation trigger**:
-- When switching nodes
-- When network topology changes
-- When explicitly requested
+
+-   When switching nodes
+-   When network topology changes
+-   When explicitly requested
 
 ---
 
 ## Registry Sync Discipline
 
 **When to update registry**:
-- Node deployed (`ay:deploy`)
-- Node departing (`ay:leave`)
-- Node merged (`ay:merge`)
-- Children list changes
-- Node status changes
+
+-   Node deployed (`ay:deploy`)
+-   Node departing (`ay:leave`)
+-   Node merged (`ay:merge`)
+-   Children list changes
+-   Node status changes
 
 **Update pattern**:
+
 ```
 1. Modify aynorica-registry.json
 2. Commit: "chore: {what-changed} in network"
@@ -390,19 +424,20 @@ Capacity remaining: ~179,800 tokens
 
 ## Integration Points
 
-| Protocol                        | Integration                                    |
-|---------------------------------|------------------------------------------------|
-| `persistent-memory.instructions`| `ay:sync` = GitHub push                        |
-| `handoff.instructions`          | Departure reports follow handoff format        |
-| `identity.instructions`         | Network commands respect precedence hierarchy  |
-| `mental-model-map.md`           | Self-awareness, combined with network-model-map|
-| `network-model-map.md`          | Network topology visualization + command ref   |
+| Protocol                         | Integration                                     |
+| -------------------------------- | ----------------------------------------------- |
+| `persistent-memory.instructions` | `ay:sync` = GitHub push                         |
+| `handoff.instructions`           | Departure reports follow handoff format         |
+| `identity.instructions`          | Network commands respect precedence hierarchy   |
+| `mental-model-map.md`            | Self-awareness, combined with network-model-map |
+| `network-model-map.md`           | Network topology visualization + command ref    |
 
 ---
 
 ## Conflict Resolution
 
 **If git conflicts occur during propagate/rebase**:
+
 1. Stop immediately
 2. Show conflict files
 3. Ask: "How to resolve? [manual/abort/skip]"
@@ -414,4 +449,4 @@ Capacity remaining: ~179,800 tokens
 
 ## Session Learnings
 
-- **2025-12-06**: Network protocol established. Command implementations defined. Integration points mapped.
+-   **2025-12-06**: Network protocol established. Command implementations defined. Integration points mapped.
