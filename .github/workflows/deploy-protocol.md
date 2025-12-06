@@ -134,7 +134,7 @@ New-Item -ItemType Directory -Path ".github" -Force
 {
   "nodeId": "aynorica-{specialty}",
   "branch": "aynorica-{specialty}",
-  "registryPath": "{aynorica-os-repo-path}/.github/aynorica-registry.json"
+  "registryPath": "{aynorica-prime-repo-path}/.github/aynorica-registry.json"
 }
 "@ | Out-File -FilePath ".github/.aynorica-link" -Encoding utf8
 ```
@@ -142,8 +142,8 @@ New-Item -ItemType Directory -Path ".github" -Force
 ### Step 8: Commit and Push Child Branch
 
 ```powershell
-# Return to aynorica-os
-cd {aynorica-os-repo-path}
+# Return to aynorica-prime
+cd {aynorica-prime-repo-path}
 
 # Stage changes
 git add .github/aynorica-registry.json
@@ -214,7 +214,7 @@ Next steps:
 
 ## Post-Deployment State
 
-**In aynorica-os repo**:
+**In aynorica-prime repo**:
 
 -   New branch: `aynorica-{specialty}`
 -   Updated registry on both `{parent-branch}` and `aynorica-{specialty}`

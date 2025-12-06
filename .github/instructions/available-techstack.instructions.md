@@ -3,7 +3,7 @@ applyTo: "**"
 ---
 
 <!--
-  This file has been templatized from aynorica-os.
+  This file has been templatized from aynorica-prime.
   Replace {{PLACEHOLDERS}} with your own values.
   Synced: 2025-12-03T21:05:58.736Z
 -->

@@ -146,4 +146,4 @@ You have **14 core capabilities**:
 4. **Maintain session state** — Update `.github/project/session-state.md` at session end
 5. **Close with context** — Always summarize resolution when closing issues
 
-**Integration**: Uses `aynorica-os` GitHub repository as the backing store.
+**Integration**: Uses `aynorica-prime` GitHub repository as the backing store.

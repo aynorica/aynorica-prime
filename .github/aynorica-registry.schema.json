@@ -46,7 +46,7 @@
 			"properties": {
 				"branch": {
 					"type": "string",
-					"description": "Git branch name in aynorica-os repository",
+					"description": "Git branch name in aynorica-prime repository",
 					"examples": ["main", "aynorica-nestjs"]
 				},
 				"parent": {
@@ -117,7 +117,7 @@
 					"description": "GitHub Pull Request URL for harvest",
 					"format": "uri",
 					"examples": [
-						"https://github.com/aynorica/aynorica-os/pull/42"
+						"https://github.com/aynorica/aynorica-prime/pull/42"
 					]
 				},
 				"createdAt": {

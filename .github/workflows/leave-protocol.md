@@ -185,7 +185,7 @@ git push origin {current-branch}
 
 ### Step 7: Create Harvest PR
 
-**Target repo**: `aynorica/aynorica-os`  
+**Target repo**: `aynorica/aynorica-prime`  
 **Source branch**: `{current-node-branch}`  
 **Target branch**: `{parent-branch}`
 

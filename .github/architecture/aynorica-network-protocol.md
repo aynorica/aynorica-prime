@@ -9,7 +9,7 @@
 
 ## Executive Summary
 
-**What we're building**: A federated node system where Aynorica instances (nodes) exist as branches in `aynorica-os`, can be deployed to external projects, and harvest knowledge back to parent nodes upon departure.
+**What we're building**: A federated node system where Aynorica instances (nodes) exist as branches in `aynorica-prime`, can be deployed to external projects, and harvest knowledge back to parent nodes upon departure.
 
 **Core Trade-off**: We're trading **operational simplicity** (single-branch brain) for **contextual isolation** and **knowledge accumulation** (multi-branch network).
 
@@ -32,7 +32,7 @@
                         SPARSE CHECKOUT / SYMLINK                 │
                                                                   │
 ┌─────────────────────────────────────────────────────────────────│──┐
-│                         AYNORICA-OS REPO                        │  │
+│                         aynorica-prime REPO                        │  │
 │                                                                 ▼  │
 │  ┌─────────────────────────────────────────────────────────────┐  │
 │  │ main (aynorica-prime)                                       │  │
@@ -73,7 +73,7 @@
 An Aynorica instance with its own mental model, specialized for a context (project, domain, or role). Each node:
 
 -   Has a globally unique name (e.g., `aynorica-nestjs`)
--   Exists as a branch in `aynorica-os`
+-   Exists as a branch in `aynorica-prime`
 -   Has exactly one parent (except Prime)
 -   Can have zero or more children
 -   Contains its own `.github/` folder with inherited + specialized knowledge
@@ -144,12 +144,12 @@ Examples:
 1. Check GitHub access (MCP or CLI)
 2. Ask: "Which node should I branch from?" (show network tree)
 3. Create unique node name: `aynorica-{project-specialty}`
-4. Create branch in `aynorica-os` repo from parent
+4. Create branch in `aynorica-prime` repo from parent
 5. Create `.github/` folder with node identity + replicated network map
-6. Add secondary remote to project: `git remote add aynorica-brain https://github.com/aynorica/aynorica-os.git`
+6. Add secondary remote to project: `git remote add aynorica-brain https://github.com/aynorica/aynorica-prime.git`
 7. Link `.github/` via sparse checkout or symlink
 8. Register self in parent's `children[]`
-9. Push to `aynorica-os`
+9. Push to `aynorica-prime`
 
 **Command**: `ay:deploy`
 
@@ -161,7 +161,7 @@ Examples:
 
 -   Read/write to `.github/` (session-state, learnings)
 -   Project code goes to project's own repo
--   Brain state syncs to aynorica-os branch
+-   Brain state syncs to aynorica-prime branch
 -   Periodic `ay:sync` pushes brain state
 
 ---
@@ -183,7 +183,7 @@ Examples:
     - Workflow improvements
 3. **Generate Handoff Report**: Create `.github/handoff/departure-report.md`
 
-4. **Create Pull Request** on `aynorica-os`:
+4. **Create Pull Request** on `aynorica-prime`:
 
     - Source: `aynorica-{name}` branch
     - Target: Parent branch
@@ -298,7 +298,7 @@ On any network change:
 
 | Field          | Purpose                                             |
 | -------------- | --------------------------------------------------- |
-| `branch`       | Git branch name in aynorica-os                      |
+| `branch`       | Git branch name in aynorica-prime                      |
 | `parent`       | Parent node name (null for Prime)                   |
 | `children`     | Array of child node names                           |
 | `description`  | One-line summary for directory listing (~50 tokens) |

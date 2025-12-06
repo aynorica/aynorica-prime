@@ -67,7 +67,7 @@ If command fails:
 4. Ask: "External project path?" → {project-path}
 5. Confirm: "Deploy aynorica-{specialty} from {current-node} to {project-path}?"
    ↓ [User approves]
-6. Create branch in aynorica-os from current branch
+6. Create branch in aynorica-prime from current branch
 7. Create child node manifest
 8. Update parent's registry entry: add to children[]
 9. Create .github/ structure in child branch
@@ -79,7 +79,7 @@ If command fails:
 
 **Post-conditions**:
 
--   New branch exists in `aynorica-os`
+-   New branch exists in `aynorica-prime`
 -   Registry updated
 -   Child added to parent's `children[]`
 -   External project has `.github/` linked
@@ -331,7 +331,7 @@ Total: 1 node
 
 ```
 1. Validate node exists
-2. Fetch node's branch from aynorica-os
+2. Fetch node's branch from aynorica-prime
 3. Read entire .github/ from that branch
 4. Load into active context
 5. Report: "Loaded {node-name}. Token cost: ~{tokens}. Current context: {list-loaded-nodes}"

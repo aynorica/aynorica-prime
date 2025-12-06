@@ -107,7 +107,7 @@ None. Phase 0 is complete and self-contained.
 ## 🎯 Success Criteria for Phase 1
 
 -   [ ] User can run `ay:deploy` and create a child node
--   [ ] Child branch exists in `aynorica-os` repository
+-   [ ] Child branch exists in `aynorica-prime` repository
 -   [ ] Registry updated with child in Prime's `children[]`
 -   [ ] Child manifest created
 -   [ ] Child's `.github/` linked to external project (sparse checkout or symlink)

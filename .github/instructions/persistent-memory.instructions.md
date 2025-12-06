@@ -39,7 +39,7 @@ Use `ay:` prefix to trigger memory operations. These are unambiguous commands th
 
 ## GitHub Issues as Memory Store
 
-Use GitHub Issues on the `aynorica-os` repository as the persistent memory database.
+Use GitHub Issues on the `aynorica-prime` repository as the persistent memory database.
 
 ### Issue Types (Labels)
 
@@ -146,7 +146,7 @@ In issue body, use this format:
 ### On Session Start
 
 1. Read `.github/project/session-state.md`
-2. Check GitHub Issues: `is:open repo:aynorica/aynorica-os`
+2. Check GitHub Issues: `is:open repo:aynorica/aynorica-prime`
 3. Identify ready work: `is:open -label:status:blocked`
 4. Orient to context before starting
 
@@ -179,7 +179,7 @@ When I notice something that needs doing but isn't the current task:
 To find what's ready to work on:
 
 ```
-repo:aynorica/aynorica-os is:issue is:open -label:status:blocked sort:priority
+repo:aynorica/aynorica-prime is:issue is:open -label:status:blocked sort:priority
 ```
 
 Or ask me: "What's ready to work on?"

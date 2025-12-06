@@ -157,7 +157,7 @@ On any network change:
 
 1. Ask user: "What specialty for this node?" (e.g., `nestjs`, `security`, `learning`)
 2. Generate unique node name: `aynorica-{specialty}`
-3. Create branch in `aynorica-os` from `main`
+3. Create branch in `aynorica-prime` from `main`
 4. Create node manifest for child
 5. Link child's `.github/` to external project (sparse checkout or symlink)
 6. Update Prime's registry: add child to `children[]`
