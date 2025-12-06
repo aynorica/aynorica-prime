@@ -174,16 +174,16 @@ For each item in diff inventory (new + modified):
      Type: {new|modified}
      Category: {category}
      Recommendation: {from departure report if available}
-     
+
      {diff preview or file summary}
      "
-  
+
   2. Prompt: "Action for {file}? [integrate/edit/skip/view-full]"
      - integrate: Accept change as-is
      - edit: Show full content, allow inline edits before applying
      - skip: Don't apply this change
      - view-full: Show complete diff/file, then re-prompt
-  
+
   3. Record decision in integration plan
 ```
 
@@ -211,14 +211,14 @@ For each item in integration plan where decision = "integrate" or "edit":
   1. If "integrate":
      a. Copy file from child to parent (overwrite or create)
      b. Preserve file permissions
-  
+
   2. If "edit":
      a. Apply edited content to parent
      b. Validate syntax if applicable (JSON, markdown lint)
-  
+
   3. Track applied changes:
      {file: {action: "integrated|edited", source: child-node}}
-  
+
   4. If error during apply:
      - Log error
      - Ask: "Error applying {file}. Retry/skip/abort?"
@@ -276,12 +276,12 @@ For each item in integration plan where decision = "integrate" or "edit":
 
 2. Generate commit message:
    "chore: merge learnings from {child-node}
-   
+
    Integrated:
    - {count} new prompts
    - {count} modified instructions
    - {count} workflow updates
-   
+
    Source: Harvest PR #{pr-number}
    Child: {child-node} ({child-branch})
    Duration: {mission-duration}
@@ -302,13 +302,13 @@ For each item in integration plan where decision = "integrate" or "edit":
 ```
 1. Confirm deletion:
    "Delete child branch '{child-branch}'? This is irreversible. [yes/no]"
-   
+
    If no: Skip deletion, continue to PR closure
    If yes: Proceed
 
 2. Delete remote branch:
    git push origin --delete {child-branch}
-   
+
    Or via GitHub API:
    DELETE /repos/{owner}/{repo}/git/refs/heads/{child-branch}
 
@@ -330,18 +330,18 @@ For each item in integration plan where decision = "integrate" or "edit":
 ```
 1. Generate closure comment:
    "✅ Harvest complete. Learnings merged into parent node '{parent-node}'.
-   
+
    ## Integrated Changes
    {list of applied files}
-   
+
    ## Synthesis Commit
    {commit-hash}: {commit-message}
-   
+
    ## Network Update
    - Node '{child-node}' removed from topology
    - Branch '{child-branch}' deleted
    - Registry updated
-   
+
    Thank you for your service, {child-node}. 🫡
    "
 
@@ -639,18 +639,18 @@ Once pushed, merge is final. To undo:
 
 Every merge creates an audit trail:
 
-| Artifact                        | Location                                  | Purpose                      |
-| ------------------------------- | ----------------------------------------- | ---------------------------- |
-| Departure report                | `.github/handoff/{node}-departure-*.md`   | Child's findings             |
-| Harvest PR                      | GitHub PR (closed)                        | Review + discussion          |
-| Synthesis commit                | Git history                               | Changes applied              |
-| Registry update commit          | Git history                               | Topology change              |
-| PR closure comment              | GitHub PR comments                        | Merge summary                |
-| Deleted branch reference        | GitHub UI (shows "deleted")               | Confirms branch removal      |
-| Parent's updated `.github/`     | Current state                             | Integrated learnings         |
-| Remaining children in registry  | `aynorica-registry.json`                  | Current network topology     |
-| Session handoff (this workflow) | `.github/workflows/merge-protocol.md`     | How merge was performed      |
-| Integration decisions log       | (Optional: save to handoff/{date}-*.md)   | What was integrated and why  |
+| Artifact                        | Location                                 | Purpose                     |
+| ------------------------------- | ---------------------------------------- | --------------------------- |
+| Departure report                | `.github/handoff/{node}-departure-*.md`  | Child's findings            |
+| Harvest PR                      | GitHub PR (closed)                       | Review + discussion         |
+| Synthesis commit                | Git history                              | Changes applied             |
+| Registry update commit          | Git history                              | Topology change             |
+| PR closure comment              | GitHub PR comments                       | Merge summary               |
+| Deleted branch reference        | GitHub UI (shows "deleted")              | Confirms branch removal     |
+| Parent's updated `.github/`     | Current state                            | Integrated learnings        |
+| Remaining children in registry  | `aynorica-registry.json`                 | Current network topology    |
+| Session handoff (this workflow) | `.github/workflows/merge-protocol.md`    | How merge was performed     |
+| Integration decisions log       | (Optional: save to handoff/{date}-\*.md) | What was integrated and why |
 
 ---
 

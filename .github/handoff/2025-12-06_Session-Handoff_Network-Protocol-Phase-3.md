@@ -92,19 +92,19 @@ None. Phase 3 documentation complete. Ready for Phase 4/5 or testing existing co
 
 ## 📝 Decisions Made
 
-| Decision                                        | Rationale                                                 | Reversible?                          |
-| ----------------------------------------------- | --------------------------------------------------------- | ------------------------------------ |
-| Selective integration with user prompts         | Parent must approve changes (intellectual synthesis)      | No (core to design)                  |
-| 4 decision modes (integrate/edit/skip/view)     | Flexible control over what gets applied                   | Yes (can simplify to 3)              |
-| Batch mode for >10 changes                      | Efficiency for large harvests                             | Yes (threshold adjustable)           |
-| Synthesis commit with traceability              | Audit trail links to source PR + child node               | No (essential for history)           |
-| Child branch deletion with confirmation         | Safety measure (deletion irreversible)                    | Yes (could auto-delete)              |
-| Auto-integrate heuristics for common cases      | Speed up integration of low-risk changes                  | Yes (can make more conservative)     |
-| Registry cleanup during merge                   | Remove child topology immediately after harvest           | No (topology must reflect reality)   |
-| Harvest PR closed (not merged)                  | Intellectual synthesis ≠ git merge                        | No (fundamental distinction)         |
-| Error recovery at each stage                    | Prevent partial merges, enable rollback                   | Yes (can simplify error handling)    |
-| Integration decisions log (optional)            | Record what was integrated and why                        | Yes (can make mandatory)             |
-| Departure report + PR remain after merge        | Historical record for audit                               | No (essential for traceability)      |
+| Decision                                    | Rationale                                            | Reversible?                        |
+| ------------------------------------------- | ---------------------------------------------------- | ---------------------------------- |
+| Selective integration with user prompts     | Parent must approve changes (intellectual synthesis) | No (core to design)                |
+| 4 decision modes (integrate/edit/skip/view) | Flexible control over what gets applied              | Yes (can simplify to 3)            |
+| Batch mode for >10 changes                  | Efficiency for large harvests                        | Yes (threshold adjustable)         |
+| Synthesis commit with traceability          | Audit trail links to source PR + child node          | No (essential for history)         |
+| Child branch deletion with confirmation     | Safety measure (deletion irreversible)               | Yes (could auto-delete)            |
+| Auto-integrate heuristics for common cases  | Speed up integration of low-risk changes             | Yes (can make more conservative)   |
+| Registry cleanup during merge               | Remove child topology immediately after harvest      | No (topology must reflect reality) |
+| Harvest PR closed (not merged)              | Intellectual synthesis ≠ git merge                   | No (fundamental distinction)       |
+| Error recovery at each stage                | Prevent partial merges, enable rollback              | Yes (can simplify error handling)  |
+| Integration decisions log (optional)        | Record what was integrated and why                   | Yes (can make mandatory)           |
+| Departure report + PR remain after merge    | Historical record for audit                          | No (essential for traceability)    |
 
 ## 🔗 Related Resources
 
@@ -196,6 +196,7 @@ None. Phase 3 documentation complete. Ready for Phase 4/5 or testing existing co
 **No blockers**. Phase 3 complete and synced. The merge protocol completes the harvest cycle:
 
 **Harvest Cycle Flow**:
+
 1. **Deploy** (`ay:deploy`) → Child node created, linked to external project
 2. **Learn** → Child accumulates specialized knowledge
 3. **Leave** (`ay:leave`) → Departure report generated, harvest PR created
@@ -235,14 +236,14 @@ None. Phase 3 documentation complete. Ready for Phase 4/5 or testing existing co
 
 ## 📊 Protocol Implementation Progress
 
-| Phase | Command         | Status      | Lines | Test Status |
-|-------|-----------------|-------------|-------|-------------|
-| 0     | Foundation      | ✅ Complete | —     | N/A         |
-| 1     | `ay:deploy`     | ✅ Complete | ~400  | ⏳ Untested |
-| 2     | `ay:leave`      | ✅ Complete | ~730  | ⏳ Untested |
-| 3     | `ay:merge`      | ✅ Complete | ~900  | ⏳ Untested |
-| 4     | `ay:scan`       | 🔜 Next     | —     | N/A         |
-| 5     | `ay:propagate`  | 🔜 Next     | —     | N/A         |
+| Phase | Command        | Status      | Lines | Test Status |
+| ----- | -------------- | ----------- | ----- | ----------- |
+| 0     | Foundation     | ✅ Complete | —     | N/A         |
+| 1     | `ay:deploy`    | ✅ Complete | ~400  | ⏳ Untested |
+| 2     | `ay:leave`     | ✅ Complete | ~730  | ⏳ Untested |
+| 3     | `ay:merge`     | ✅ Complete | ~900  | ⏳ Untested |
+| 4     | `ay:scan`      | 🔜 Next     | —     | N/A         |
+| 5     | `ay:propagate` | 🔜 Next     | —     | N/A         |
 
 **Total protocol documentation**: ~2,030 lines  
 **Estimated remaining effort**: 1 hour (Phases 4-5)  

@@ -191,24 +191,71 @@ If command fails:
 -   Current node has children
 -   Current node state synced
 
-**Flow**:
+**Implementation**: See `.github/workflows/propagate-protocol.md` for full 10-step workflow
+
+**Flow Summary**:
 
 ```
-1. List children from registry
-2. Confirm: "Propagate updates to {count} children? {child-list}"
-   ↓ [User approves]
-3. For each child:
+1. Validate parent has children and clean state
+2. List target children (exclude departing)
+3. User confirmation (yes/no/dry-run/select)
+4. Fetch latest remote state
+5. For each child:
    a. Checkout child branch
-   b. Run: git rebase origin/{parent-branch}
-   c. Resolve conflicts (ask user if any)
-   d. Push child branch
-4. Report: "Propagated to: {child-list}. All children rebased."
+   b. Rebase onto parent branch
+   c. Resolve conflicts (6 strategies available)
+   d. Push rebased branch (--force-with-lease)
+6. Update registry with propagation metadata
+7. Generate propagation report
 ```
 
 **Post-conditions**:
 
--   All children have latest parent changes
--   Children's histories updated
+-   All children rebased onto parent
+-   Registry `lastPropagation` updated with metadata
+-   Propagation report generated
+-   Conflicts logged for audit
+
+**Workflow**: `.github/workflows/propagate-protocol.md`
+
+---
+
+### `ay:scan`
+
+**Purpose**: Lightweight knowledge discovery — scan node's `.github/` without full context load.
+
+**Preconditions**:
+
+-   Target node exists in registry
+
+**Implementation**: See `.github/workflows/scan-protocol.md` for full 7-step workflow
+
+**Flow Summary**:
+
+```
+1. Validate target node exists (not current node)
+2. Check if already fully loaded
+3. Fetch node's branch (only .github/)
+4. Scan .github/ structure (metadata-only)
+5. Identify notable capabilities (read key files only)
+6. Generate scan report (capabilities, recommendations)
+7. Report to user (node stays unloaded)
+```
+
+**Post-conditions**:
+
+-   Scan report generated (~2,000 tokens)
+-   Node remains unloaded (no context pollution)
+-   Cached for 1 hour (avoid re-scanning)
+
+**Use cases**:
+
+-   Preview before `ay:load`
+-   Cross-pollination discovery
+-   Verify propagation impact
+-   Network exploration
+
+**Workflow**: `.github/workflows/scan-protocol.md`
 
 ---
 
