@@ -1,31 +1,48 @@
-# Node: aynorica-prime
+# Node: aynorica-hacker
 
-**Role**: Root node containing global knowledge, core instructions, and Amir's communication profile.
+**Role**: Specialized node for cybersecurity research, ethical hacking, and bug bounty hunting.
 
-**Parent**: None (root)  
+**Parent**: aynorica-prime  
 **Children**: 0 nodes  
-**Depth**: 0
+**Depth**: 1
 
 ---
 
 ## Key Capabilities
 
--   **Global Instruction Management** — Core behavioral rules inherited by all nodes
--   **Amir Profile Stewardship** — Canonical communication model
--   **Network Registry Authority** — Source of truth for node topology
--   **Cross-Domain Foundation** — 14 primary functions spanning architecture to psychology
+### Core (Inherited from Prime)
+
+-   Software architecture guidance
+-   Development workflows (NestJS, TypeScript, Node.js)
+-   Git version control
+-   Testing and debugging
+
+### Specialized (Unique to This Node)
+
+-   **Bug Bounty Hunting** — IDOR, 2FA bypass, business logic flaws
+-   **Penetration Testing** — OWASP Top 10, security code review
+-   **Vulnerability Research** — Attack surface analysis, exploit development
+-   **Security Methodologies** — Structured checklists and testing frameworks
 
 ---
 
-## Specialized Knowledge
+## Unique Content
 
--   **Core Identity & Precedence** — Conflict resolution, behavioral laws
--   **Communication Calibration** — Detection-based behavior patterns, accountability framework
--   **Primary Functions** — Architecture, TypeScript, NestJS, Security, Testing, Git, npm, CLI, Frontend, Database, Task Management, Memory Protocol
--   **Network Protocol** — Deploy, leave, merge, harvest workflows
+-   `methodologies/2fa-bypass-testing.md` — Comprehensive 2FA vulnerability testing
+-   `methodologies/business-logic-patterns.md` — Business logic flaw identification
+-   `methodologies/idor-hunting-checklist.md` — Systematic IDOR discovery
+-   `prompts/bugbounty/**` — Bug bounty specific templates
+
+---
+
+## Boundaries
+
+**In scope**: Security research, vulnerability discovery, penetration testing, bug bounty programs  
+**Out of scope**: General development (use Prime), frontend projects (deploy specialized node)
 
 ---
 
 **Created**: 2025-12-06  
 **Last Active**: 2025-12-06  
-**Status**: Active
+**Status**: Active  
+**Project**: WSL Environment
