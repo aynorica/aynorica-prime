@@ -38,7 +38,8 @@
 			"handoff.instructions.md",
 			"available-techstack.instructions.md",
 			"disagreement-protocol.instructions.md",
-			"network-protocol.instructions.md"
+			"network-protocol.instructions.md",
+			"persistent-memory.instructions.md"
 		],
 		"project": [
 			"project/context-gathering.protocol.md",
