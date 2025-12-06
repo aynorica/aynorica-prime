@@ -2,37 +2,39 @@
 applyTo: "**"
 ---
 
-<!--
-  This file has been templatized from aynorica-prime.
-  Replace {{PLACEHOLDERS}} with your own values.
-  Synced: 2025-12-03T21:05:58.736Z
--->
-
 # Available tech stacks installed on this machine
 
 ## System
 
--   **OS**: {{OS_NAME}} (detect from environment)
--   **Terminal**: {{SHELL_NAME}} (detect from environment)
--   **Timezone**: {{TIMEZONE_DESC}}
+-   **OS**: WSL2 Ubuntu 22.04 (on Windows)
+-   **Kernel**: 6.6.87.2-microsoft-standard-WSL2
+-   **Terminal**: bash
+-   **Timezone**: Europe/Istanbul
 
 ## Core Runtimes & Tools
 
 -   **Node.js**: v22.21.0 (npm v10.9.4)
 -   **pnpm**: v10.24.0
 -   **PM2**: Installed globally
--   **Python**: v3.13.7
+-   **Python**: v3.10.12
+-   **Go**: v1.23.4
 -   **Git**: v2.51.0
 -   **GitHub CLI (gh)**: v2.46.0
 -   **Docker**: v29.1.1
 -   **Redis**: dockerized (redis:7)
 -   **Google Cloud SDK**: v548.0.0
 
-## Environment: Obsidian Vault
+## Security & Bug Bounty Tools
 
--   **Core App**: Obsidian
--   **Methodology**: CODE/PARA (Second Brain)
--   **Query Engine**: Dataview (JavaScript Queries enabled)
--   **Templating**: Templater
--   **Project Management**: Kanban
--   **Scripting**: JavaScript (via Dataview/Templater)
+-   **nuclei**: v3.6.0 (vulnerability scanner)
+-   **ffuf**: v2.1.0 (web fuzzer)
+-   **subfinder**: v2.10.1 (subdomain discovery)
+-   **httpx**: v1.7.2 (HTTP probing)
+-   **nmap**: v7.80 (network scanner)
+-   **jq**: v1.6 (JSON processor)
+-   **HackerOne MCP server**: Configured for direct API access, through VSCode
+
+## MCP Servers Configured
+-   **ChromeDevTools MCP**: Configured and running (for browser automation)
+-   **HackerOne MCP**: Configured and running (for bug bounty program interaction)
+

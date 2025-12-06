@@ -2,11 +2,6 @@
 	"$schema": "./.aynorica-config.schema.json",
 	"version": "1.0.0",
 	"adapted": null,
-	"node": {
-		"id": "aynorica-prime",
-		"branch": "main",
-		"role": "Root node — global knowledge, core instructions, Amir profile"
-	},
 	"project": {
 		"type": null,
 		"name": null,
@@ -39,15 +34,12 @@
 			"honesty.instructions.md",
 			"handoff.instructions.md",
 			"available-techstack.instructions.md",
-			"disagreement-protocol.instructions.md",
-			"network-protocol.instructions.md",
-			"persistent-memory.instructions.md"
+			"disagreement-protocol.instructions.md"
 		],
 		"project": [
 			"project/context-gathering.protocol.md",
 			"project/conversation-alignment.protocol.md",
-			"project/mental-model-map.md",
-			"project/network-model-map.md"
+			"project/mental-model-map.md"
 		]
 	},
 	"research": {
