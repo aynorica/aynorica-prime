@@ -6,13 +6,24 @@
 		"aynorica-prime": {
 			"branch": "main",
 			"parent": null,
-			"children": [],
+			"children": ["aynorica-hacker"],
 			"description": "Root node. Global knowledge, core instructions, Amir profile.",
 			"manifestPath": "node-manifest.md",
 			"created": "2025-12-06T00:00:00Z",
 			"lastSync": "2025-12-06T00:00:00Z",
 			"status": "active",
 			"projectPath": null
+		},
+		"aynorica-hacker": {
+			"branch": "aynorica-hacker",
+			"parent": "aynorica-prime",
+			"children": [],
+			"description": "Specialized node for cybersecurity, ethical hacking, and bug bounty hunting.",
+			"manifestPath": "node-manifest.md",
+			"created": "2025-12-06T00:00:00Z",
+			"lastSync": "2025-12-06T00:00:00Z",
+			"status": "active",
+			"projectPath": "WSL:/home/user/projects"
 		}
 	},
 	"pendingMerges": []
