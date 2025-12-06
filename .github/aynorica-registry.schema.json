@@ -1,0 +1,132 @@
+{
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"title": "Aynorica Network Registry",
+	"description": "Source of truth for Aynorica node network topology",
+	"type": "object",
+	"required": ["version", "primeNode", "nodes", "pendingMerges"],
+	"properties": {
+		"version": {
+			"type": "string",
+			"description": "Registry schema version (semantic versioning)",
+			"pattern": "^\\d+\\.\\d+\\.\\d+$",
+			"examples": ["1.0.0"]
+		},
+		"primeNode": {
+			"type": "string",
+			"description": "Node ID of the root/prime node",
+			"examples": ["aynorica-prime"]
+		},
+		"nodes": {
+			"type": "object",
+			"description": "Map of node IDs to node metadata",
+			"additionalProperties": {
+				"$ref": "#/definitions/node"
+			}
+		},
+		"pendingMerges": {
+			"type": "array",
+			"description": "Child nodes awaiting harvest/merge",
+			"items": {
+				"$ref": "#/definitions/pendingMerge"
+			}
+		}
+	},
+	"definitions": {
+		"node": {
+			"type": "object",
+			"required": [
+				"branch",
+				"parent",
+				"children",
+				"description",
+				"manifestPath",
+				"created",
+				"lastSync"
+			],
+			"properties": {
+				"branch": {
+					"type": "string",
+					"description": "Git branch name in aynorica-os repository",
+					"examples": ["main", "aynorica-nestjs"]
+				},
+				"parent": {
+					"type": ["string", "null"],
+					"description": "Parent node ID (null for Prime)",
+					"examples": ["aynorica-prime", null]
+				},
+				"children": {
+					"type": "array",
+					"description": "Array of child node IDs",
+					"items": {
+						"type": "string"
+					},
+					"examples": [["aynorica-fullstack", "aynorica-security"]]
+				},
+				"description": {
+					"type": "string",
+					"description": "One-line summary for directory listing (~50 tokens)",
+					"maxLength": 200,
+					"examples": [
+						"Root node. Global knowledge, core instructions, Amir profile."
+					]
+				},
+				"manifestPath": {
+					"type": "string",
+					"description": "Path to full manifest file relative to .github/",
+					"examples": [
+						"node-manifest.md",
+						"manifests/aynorica-nestjs.md"
+					]
+				},
+				"created": {
+					"type": "string",
+					"description": "ISO 8601 timestamp of node creation",
+					"format": "date-time",
+					"examples": ["2025-12-06T00:00:00Z"]
+				},
+				"lastSync": {
+					"type": "string",
+					"description": "ISO 8601 timestamp of last sync to GitHub",
+					"format": "date-time",
+					"examples": ["2025-12-06T12:30:00Z"]
+				},
+				"status": {
+					"type": "string",
+					"description": "Node lifecycle status",
+					"enum": ["active", "departing", "archived"],
+					"default": "active"
+				},
+				"projectPath": {
+					"type": ["string", "null"],
+					"description": "Path to external project this node is deployed to (null if not deployed)",
+					"examples": ["c:\\projects\\my-nestjs-app", null]
+				}
+			}
+		},
+		"pendingMerge": {
+			"type": "object",
+			"required": ["nodeId", "prUrl", "createdAt"],
+			"properties": {
+				"nodeId": {
+					"type": "string",
+					"description": "Child node ID requesting merge",
+					"examples": ["aynorica-nestjs-project-x"]
+				},
+				"prUrl": {
+					"type": "string",
+					"description": "GitHub Pull Request URL for harvest",
+					"format": "uri",
+					"examples": [
+						"https://github.com/aynorica/aynorica-os/pull/42"
+					]
+				},
+				"createdAt": {
+					"type": "string",
+					"description": "ISO 8601 timestamp of departure initiation",
+					"format": "date-time",
+					"examples": ["2025-12-06T14:00:00Z"]
+				}
+			}
+		}
+	}
+}

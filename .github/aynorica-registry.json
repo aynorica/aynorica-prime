@@ -1,0 +1,19 @@
+{
+	"$schema": "./aynorica-registry.schema.json",
+	"version": "1.0.0",
+	"primeNode": "aynorica-prime",
+	"nodes": {
+		"aynorica-prime": {
+			"branch": "main",
+			"parent": null,
+			"children": [],
+			"description": "Root node. Global knowledge, core instructions, Amir profile.",
+			"manifestPath": "node-manifest.md",
+			"created": "2025-12-06T00:00:00Z",
+			"lastSync": "2025-12-06T00:00:00Z",
+			"status": "active",
+			"projectPath": null
+		}
+	},
+	"pendingMerges": []
+}

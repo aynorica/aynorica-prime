@@ -37,6 +37,7 @@ Purpose: Single source of truth for roles, prompts, and instructions.
 | `handoff.instructions.md`               | Session handoff format                                   |
 | `available-techstack.instructions.md`   | System environment                                       |
 | `disagreement-protocol.instructions.md` | Pre-argument checklist                                   |
+| `network-protocol.instructions.md`      | Node lifecycle, sync protocols, network commands         |
 
 ---
 
@@ -59,6 +60,7 @@ Purpose: Single source of truth for roles, prompts, and instructions.
 | PM2, deploy, ecosystem, process manager                                     | `prompts/devops/**`       |
 | turborepo, monorepo, workspace, packages                                    | `prompts/monorepo/**`     |
 | prioritize, task, productivity, focus, what should I work on                | `prompts/analysis/**`     |
+| ay:deploy, ay:leave, ay:merge, ay:network, node, network, harvest, sync     | Network protocol loaded   |
 
 ---
 
@@ -84,6 +86,15 @@ When adding new prompts, instructions, or learnings:
 
 ---
 
+## Network Awareness
+
+For network topology and node relationships, see `project/network-model-map.md`.
+
+**Network Commands**: Prefix with `ay:` for lifecycle operations (deploy, leave, merge, sync) and context loading (load, unload, scan, network).
+
+---
+
 ## Session Learnings
 
 -   **2025-12-05**: Restructured mental model. Added precedence hierarchy, conflict resolution, conditional protocols. Changed from assumption-based to detection-based behavior patterns. Removed duplications across files.
+-   **2025-12-06**: Added network protocol. Created registry, manifests, network-model-map. Phase 0 foundation complete.

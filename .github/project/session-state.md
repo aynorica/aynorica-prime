@@ -10,34 +10,36 @@
 
 ## Financial Situation
 
-- **Need:** $10,000 by Dec 31
-- **Have:** $200 now + $2,000 salary incoming = $2,200
-- **Gap:** $7,800 in ~25 days
-- **Deadline:** HARD (rent + legal)
+-   **Need:** $10,000 by Dec 31
+-   **Have:** $200 now + $2,000 salary incoming = $2,200
+-   **Gap:** $7,800 in ~25 days
+-   **Deadline:** HARD (rent + legal)
 
 ## Constraints
 
-- No professional network to tap
-- No half-built projects to monetize
-- Limited time (squeezing around day job)
-- Freelance profiles exist but no reputation
-- Burp Pro / paid tools not available
+-   No professional network to tap
+-   No half-built projects to monetize
+-   Limited time (squeezing around day job)
+-   Freelance profiles exist but no reputation
+-   Burp Pro / paid tools not available
 
 ## Strategy Decided
 
 **Primary Track: Bug Bounty Hunting**
-- Platform: HackerOne
-- Approach: Focus on business logic, IDOR, auth bypasses, race conditions
-- Why: Fits Amir's pattern of "finding clever systems/strategies" + grinding
+
+-   Platform: HackerOne
+-   Approach: Focus on business logic, IDOR, auth bypasses, race conditions
+-   Why: Fits Amir's pattern of "finding clever systems/strategies" + grinding
 
 **Tools Status (Windows + WSL Ubuntu):**
-- ✓ Python 3.14, Git, Docker, WSL Ubuntu 22.04
-- ✗ Need to install: nuclei, ffuf, subfinder, httpx, nmap, Burp Community, ZAP
+
+-   ✓ Python 3.14, Git, Docker, WSL Ubuntu 22.04
+-   ✗ Need to install: nuclei, ffuf, subfinder, httpx, nmap, Burp Community, ZAP
 
 ## In Progress
 
-- Setting up security tooling in WSL
-- Transitioning to WSL environment for bug bounty work
+-   Setting up security tooling in WSL
+-   Transitioning to WSL environment for bug bounty work
 
 ## Next Steps (WSL Session)
 
@@ -48,9 +50,9 @@
 
 ## Session Notes
 
-- Rejected crypto trading strategy (too risky, no edge, gambling disguised as engineering)
-- Initially proposed Kali VPS + custom tools — redirected to use existing WSL + free tools
-- Amir has `create-aynorica` npm package ready for quick deployment
+-   Rejected crypto trading strategy (too risky, no edge, gambling disguised as engineering)
+-   Initially proposed Kali VPS + custom tools — redirected to use existing WSL + free tools
+-   Amir has `create-aynorica` npm package ready for quick deployment
 
 ## Next Session Prompt
 

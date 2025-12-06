@@ -1,0 +1,412 @@
+---
+applyTo: "**"
+---
+
+# Network Protocol Instructions
+
+> **Purpose**: Operational rules for Aynorica node network lifecycle, sync, and command execution.
+
+---
+
+## Core Rules
+
+1. **Prime is authoritative** — `aynorica-registry.json` on `main` is the single source of truth
+2. **Intellectual merges only** — Child → Parent is synthesis, NOT git merge
+3. **Explicit commands** — All network operations require `ay:` prefix (unambiguous triggers)
+4. **Sync before network ops** — Always `ay:sync` current state before `ay:deploy`, `ay:leave`, or `ay:merge`
+5. **Lazy loading by default** — Load full node context only on explicit `ay:load` or when within visibility window
+
+---
+
+## Command Execution Protocol
+
+### General Pattern
+
+```
+User: ay:{command} [args]
+  ↓
+Aynorica:
+  1. Parse command + arguments
+  2. Validate preconditions
+  3. Describe action + ask confirmation
+  4. Execute on approval
+  5. Update registry if topology changed
+  6. Sync to GitHub
+  7. Confirm completion
+```
+
+### Error Handling
+
+If command fails:
+1. State exact failure point
+2. Show current state (unchanged)
+3. Suggest remediation
+4. Do NOT partially apply changes
+
+---
+
+## Command Implementations
+
+### `ay:deploy`
+
+**Purpose**: Create new child node from current parent, link to external project.
+
+**Preconditions**:
+- GitHub access (MCP or CLI)
+- Current node state synced
+- External project path identified
+
+**Flow**:
+```
+1. Ask: "What specialty for this node?" → {specialty}
+2. Generate node ID: aynorica-{specialty}
+3. Validate uniqueness in registry
+4. Ask: "External project path?" → {project-path}
+5. Confirm: "Deploy aynorica-{specialty} from {current-node} to {project-path}?"
+   ↓ [User approves]
+6. Create branch in aynorica-os from current branch
+7. Create child node manifest
+8. Update parent's registry entry: add to children[]
+9. Create .github/ structure in child branch
+10. Link to project (sparse checkout or symlink)
+11. Commit child branch + parent update
+12. Push both branches
+13. Report: "Deployed aynorica-{specialty}. Branch: aynorica-{specialty}. Linked to {project-path}."
+```
+
+**Post-conditions**:
+- New branch exists in `aynorica-os`
+- Registry updated
+- Child added to parent's `children[]`
+- External project has `.github/` linked
+
+---
+
+### `ay:leave`
+
+**Purpose**: Prepare departure from external project, extract learnings, create harvest PR.
+
+**Preconditions**:
+- Current node is NOT Prime
+- Node is deployed to an external project
+- GitHub access available
+
+**Flow**:
+```
+1. Confirm: "This will prepare departure from {project-path}. Continue?"
+   ↓ [User approves]
+2. Scan entire .github/ for:
+   - New prompts created
+   - Modified instructions
+   - Session learnings
+   - Profile observations
+3. Filter: Keep transferable knowledge, discard project-specific details
+4. Generate departure-report.md with:
+   - Duration (created → departed dates)
+   - Project context summary
+   - Reusable learnings
+   - New prompts/instructions table
+   - Amir profile updates
+   - Recommended parent actions
+5. Commit departure report to current branch
+6. Create PR on aynorica-os:
+   - Source: {this-node-branch}
+   - Target: {parent-branch}
+   - Title: "[Harvest] {this-node} departure"
+   - Body: Link to departure-report.md
+7. Update registry: set status = "departing", add to pendingMerges[]
+8. Sync to GitHub
+9. Report: "Departure prepared. PR created: {pr-url}. Notify parent to run: ay:merge {this-node}"
+```
+
+**Post-conditions**:
+- Departure report committed
+- PR created
+- Registry updated with pending merge
+- Node status = "departing"
+
+---
+
+### `ay:merge [node-name]`
+
+**Purpose**: Accept child's learnings, synthesize into parent, delete child branch.
+
+**Preconditions**:
+- `[node-name]` is in current node's `children[]`
+- Child has status = "departing"
+- Departure PR exists
+
+**Flow**:
+```
+1. Validate: child exists and is departing
+2. Fetch child's PR
+3. Read departure-report.md
+4. Analyze diffs in child's .github/ vs parent's
+5. For each synthesizable change:
+   a. Show diff/change
+   b. Ask: "Apply this change? [yes/no/edit]"
+   c. On "yes": apply to parent
+   d. On "edit": let user modify before applying
+   e. On "no": skip
+6. Update parent's registry:
+   - Remove child from children[]
+   - Remove from pendingMerges[]
+7. Commit synthesis: "chore: merge learnings from {node-name}"
+8. Delete child branch: git push origin --delete {child-branch}
+9. Close PR with summary comment
+10. Sync to GitHub
+11. Report: "Merged learnings from {node-name}. Branch deleted. Network updated."
+```
+
+**Post-conditions**:
+- Child's learnings integrated
+- Child branch deleted
+- Registry cleaned
+- PR closed
+
+---
+
+### `ay:propagate`
+
+**Purpose**: Push current node's updates to all children (trigger downstream rebase).
+
+**Preconditions**:
+- Current node has children
+- Current node state synced
+
+**Flow**:
+```
+1. List children from registry
+2. Confirm: "Propagate updates to {count} children? {child-list}"
+   ↓ [User approves]
+3. For each child:
+   a. Checkout child branch
+   b. Run: git rebase origin/{parent-branch}
+   c. Resolve conflicts (ask user if any)
+   d. Push child branch
+4. Report: "Propagated to: {child-list}. All children rebased."
+```
+
+**Post-conditions**:
+- All children have latest parent changes
+- Children's histories updated
+
+---
+
+### `ay:sync`
+
+**Purpose**: Push current brain state to GitHub (session-state, learnings, updates).
+
+**Preconditions**:
+- Changes exist in .github/
+
+**Flow**:
+```
+1. Check git status in .github/
+2. If no changes: "No changes to sync."
+3. If changes exist:
+   a. Show changed files
+   b. Ask: "Sync these changes? [yes/no]"
+      ↓ [User approves]
+   c. git add .github/
+   d. git commit -m "chore: sync brain state"
+   e. git push origin {current-branch}
+   f. Update registry lastSync timestamp
+4. Report: "Synced to {branch}. Last sync: {timestamp}"
+```
+
+**Post-conditions**:
+- Changes committed and pushed
+- Registry `lastSync` updated
+
+---
+
+### `ay:network`
+
+**Purpose**: Show directory of all nodes (IDs + descriptions).
+
+**Preconditions**: None
+
+**Flow**:
+```
+1. Read aynorica-registry.json
+2. Generate table:
+   | Node ID | Description | Parent | Children | Status | Depth |
+3. Display with tree visualization
+4. Highlight current node
+```
+
+**Output Example**:
+```
+Network Directory (1 node):
+
+aynorica-prime (main) ← YOU ARE HERE
+└── Root node. Global knowledge, core instructions, Amir profile.
+
+Total: 1 node
+```
+
+---
+
+### `ay:load [node-name]`
+
+**Purpose**: Load full mental model of another node into context.
+
+**Preconditions**:
+- `[node-name]` exists in registry
+
+**Flow**:
+```
+1. Validate node exists
+2. Fetch node's branch from aynorica-os
+3. Read entire .github/ from that branch
+4. Load into active context
+5. Report: "Loaded {node-name}. Token cost: ~{tokens}. Current context: {list-loaded-nodes}"
+```
+
+**Post-conditions**:
+- Node's full context available
+- Token budget increased
+
+---
+
+### `ay:unload [node-name]`
+
+**Purpose**: Drop node from active context (free tokens).
+
+**Preconditions**:
+- `[node-name]` is currently loaded
+
+**Flow**:
+```
+1. Remove node's context from memory
+2. Report: "Unloaded {node-name}. Tokens freed: ~{tokens}. Current context: {list-loaded-nodes}"
+```
+
+**Post-conditions**:
+- Node returned to directory-only status
+- Token budget reduced
+
+---
+
+### `ay:context`
+
+**Purpose**: Show what's currently loaded in context.
+
+**Preconditions**: None
+
+**Flow**:
+```
+1. List currently loaded nodes:
+   - Current node (always)
+   - Visibility window nodes (±2 levels)
+   - Explicitly loaded nodes
+2. Show token budget estimate
+3. Show available capacity
+```
+
+**Output Example**:
+```
+Active Context:
+├── aynorica-prime (current) — ~10K tokens
+├── aynorica-fullstack (visibility +1) — ~200 tokens (manifest only)
+└── aynorica-security (explicit load) — ~10K tokens
+
+Total: ~20,200 tokens
+Capacity remaining: ~179,800 tokens
+```
+
+---
+
+### `ay:scan [node-name]`
+
+**Purpose**: Read another node's `.github/` and report learnings (without full context load).
+
+**Preconditions**:
+- `[node-name]` exists in registry
+
+**Flow**:
+```
+1. Validate node exists
+2. Fetch node's branch
+3. Scan .github/ for:
+   - Unique prompts
+   - Instruction modifications
+   - Session learnings
+   - Profile observations
+4. Generate summary report:
+   - Notable capabilities
+   - Specialized knowledge
+   - Recommended cross-pollination opportunities
+5. Do NOT load full context (keep token budget low)
+6. Report findings
+```
+
+**Use case**: Lightweight knowledge discovery before deciding to `ay:load`.
+
+---
+
+## Visibility Window Management
+
+**Default behavior** (automatic):
+- Current node: Full context loaded
+- ±2 levels: Manifests loaded (~200 tokens each)
+- All others: Directory entry only (~50 tokens each)
+
+**Override**:
+- Use `ay:load` to bring distant node into full context
+- Use `ay:unload` to drop node from full context
+
+**Recalculation trigger**:
+- When switching nodes
+- When network topology changes
+- When explicitly requested
+
+---
+
+## Registry Sync Discipline
+
+**When to update registry**:
+- Node deployed (`ay:deploy`)
+- Node departing (`ay:leave`)
+- Node merged (`ay:merge`)
+- Children list changes
+- Node status changes
+
+**Update pattern**:
+```
+1. Modify aynorica-registry.json
+2. Commit: "chore: {what-changed} in network"
+3. Push to branch
+4. If on Prime: propagate to children
+```
+
+---
+
+## Integration Points
+
+| Protocol                        | Integration                                    |
+|---------------------------------|------------------------------------------------|
+| `persistent-memory.instructions`| `ay:sync` = GitHub push                        |
+| `handoff.instructions`          | Departure reports follow handoff format        |
+| `identity.instructions`         | Network commands respect precedence hierarchy  |
+| `mental-model-map.md`           | Self-awareness, combined with network-model-map|
+| `network-model-map.md`          | Network topology visualization + command ref   |
+
+---
+
+## Conflict Resolution
+
+**If git conflicts occur during propagate/rebase**:
+1. Stop immediately
+2. Show conflict files
+3. Ask: "How to resolve? [manual/abort/skip]"
+4. On "manual": Open files, let user resolve, continue
+5. On "abort": Revert to pre-propagate state
+6. On "skip": Skip conflicting child, continue to next
+
+---
+
+## Session Learnings
+
+- **2025-12-06**: Network protocol established. Command implementations defined. Integration points mapped.
