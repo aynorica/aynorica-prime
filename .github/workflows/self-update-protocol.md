@@ -1,196 +1,176 @@
-# Aynorica Self-Update Protocol
+# Aynorica Child Node Integration Protocol
 
-> **For**: Old-Aynorica running in an external repository  
-> **From**: Aynorica-Prime (current version)  
-> **Goal**: Update yourself to the latest Aynorica OS
+> **For**: Aynorica running in an external repository (child node)  
+> **From**: Aynorica-Prime  
+> **Goal**: Connect to Prime's network by integrating a specialized child branch
+
+---
+
+## Overview
+
+Child nodes are **branches** on `aynorica-prime`, not separate repos. Your external project keeps its own Git history — you just copy the `.github/` folder from Prime's child branch.
+
+```
+aynorica-prime (GitHub)
+├── main                    ← Prime node
+├── aynorica-hacker         ← Child branch (WSL projects)
+└── aynorica-figma-nextjs   ← Child branch (your project)
+
+Your External Repo (e.g., wm-dashboard)
+└── .github/                ← Copied from child branch
+```
 
 ---
 
 ## Pre-Flight Check
 
-1. Confirm you have GitHub MCP access: Run any `mcp_github_*` tool
-2. Confirm your current repo: Check your `repoContext`
-3. Note your current working directory
+1. Confirm GitHub MCP access: Run any `mcp_github_*` tool
+2. Confirm your current repo: Check `repoContext`
+3. Know your child branch name (e.g., `aynorica-figma-nextjs`)
 
 ---
 
-## Step 1: Clone Aynorica-Prime Locally
+## Step 1: Clone Prime's Child Branch
 
 ```powershell
-# Navigate to a parent directory (adjust path as needed)
+# Navigate to a temp location
 cd C:\Users\amird\Desktop\AI
 
-# Clone the latest Aynorica OS
-git clone https://github.com/aynorica/aynorica-prime.git aynorica-prime-source
+# Clone ONLY the child branch (not main)
+git clone --branch {CHILD_BRANCH} --single-branch https://github.com/aynorica/aynorica-prime.git aynorica-source
+
+# Example:
+git clone --branch aynorica-figma-nextjs --single-branch https://github.com/aynorica/aynorica-prime.git aynorica-source
 ```
 
 ---
 
-## Step 2: Copy Core Files to Your Repository
-
-The essential files live in `.github/`. Copy these to your repo:
+## Step 2: Copy `.github/` to Your Repository
 
 ```powershell
-# Set paths (adjust YOUR_REPO_PATH)
-$source = "C:\Users\amird\Desktop\AI\aynorica-prime-source\.github"
-$dest = "YOUR_REPO_PATH\.github"
+# Set paths
+$source = "C:\Users\amird\Desktop\AI\aynorica-source\.github"
+$dest = "{YOUR_REPO_PATH}\.github"
 
-# Create .github if it doesn't exist
+# Create .github if needed
 New-Item -ItemType Directory -Path $dest -Force
 
-# Copy core directories
-Copy-Item -Path "$source\instructions" -Destination $dest -Recurse -Force
-Copy-Item -Path "$source\bootstrap" -Destination $dest -Recurse -Force
-Copy-Item -Path "$source\prompts" -Destination $dest -Recurse -Force
-Copy-Item -Path "$source\workflows" -Destination $dest -Recurse -Force
-Copy-Item -Path "$source\project" -Destination $dest -Recurse -Force
-Copy-Item -Path "$source\memory" -Destination $dest -Recurse -Force
-
-# Copy registry (you'll modify this)
-Copy-Item -Path "$source\aynorica-registry.json" -Destination $dest -Force
+# Copy everything
+Copy-Item -Path "$source\*" -Destination $dest -Recurse -Force
 ```
 
 ---
 
-## Step 3: Create Your Node Manifest
+## Step 3: Create Link File
 
-Create `.github/node-manifest.md`:
-
-```markdown
-# aynorica-{specialty}
-
-**Type**: Child Node  
-**Parent**: aynorica-prime  
-**Branch**: main (or your working branch)  
-**Specialty**: {Your Specialty}  
-**Project**: {project-name}
-
-## Purpose
-
-Specialized Aynorica node focused on {specialty} for the {project-name} project.
-
-## Capabilities
-
--   {Key capability 1}
--   {Key capability 2}
--   {Key capability 3}
-
-## Boundaries
-
-**In scope**: All {project-name} development  
-**Out of scope**: Core Aynorica OS changes (those go to Prime)
-
-## Sync Protocol
-
--   Pulls updates from parent: aynorica-prime
--   Pushes learnings back via harvest PR
-```
-
----
-
-## Step 4: Create Link File
-
-Create `.github/.aynorica-link`:
+Create `.github/.aynorica-link` in your repo:
 
 ```json
 {
-	"nodeId": "aynorica-{specialty}",
+	"nodeId": "{CHILD_NODE_ID}",
 	"parentRepo": "aynorica/aynorica-prime",
-	"parentBranch": "main",
-	"specialty": "{specialty}",
-	"created": "{ISO timestamp}"
+	"parentBranch": "{CHILD_BRANCH}",
+	"specialty": "{SPECIALTY}",
+	"created": "{ISO_TIMESTAMP}"
 }
 ```
 
----
-
-## Step 5: Update Registry (Register Yourself)
-
-Edit `.github/aynorica-registry.json` — replace the entire content with:
+**Example:**
 
 ```json
 {
-	"version": "1.0.0",
-	"nodes": {
-		"aynorica-{specialty}": {
-			"branch": "main",
-			"parent": "aynorica-prime",
-			"children": [],
-			"description": "{Brief description of your specialty}",
-			"manifestPath": "node-manifest.md",
-			"created": "{ISO timestamp}",
-			"lastSync": "{ISO timestamp}",
-			"status": "active",
-			"projectPath": "{project-name}"
-		}
-	}
+	"nodeId": "aynorica-figma-nextjs",
+	"parentRepo": "aynorica/aynorica-prime",
+	"parentBranch": "aynorica-figma-nextjs",
+	"specialty": "figma-nextjs",
+	"created": "2025-12-07T00:00:00Z"
 }
 ```
 
 ---
 
-## Step 6: Commit and Push
+## Step 4: Commit and Push
 
 ```powershell
-cd YOUR_REPO_PATH
+cd {YOUR_REPO_PATH}
 
 git add .github/
-git commit -m "feat: integrate Aynorica OS
+git commit -m "feat: integrate Aynorica OS ({SPECIALTY} node)
 
-- Added core instruction files from aynorica-prime
-- Created node manifest as {specialty} specialty
-- Registered as child node of aynorica-prime"
+- Added instruction files from aynorica-prime/{CHILD_BRANCH}
+- Connected as child node of aynorica-prime"
 
-git push origin main
+git push origin {YOUR_BRANCH}
 ```
 
 ---
 
-## Step 7: Notify Prime (Optional)
-
-Tell the user to run this in aynorica-prime:
-
-```
-ay:register-child aynorica-{specialty} {project-name}
-```
-
-Or manually update `aynorica-prime/.github/aynorica-registry.json` to add you as a child.
-
----
-
-## Step 8: Verify
+## Step 5: Verify Integration
 
 Test yourself:
 
-1. Read `.github/instructions/identity.instructions.md` — you should see yourself as Aynorica
-2. Try `ay:status` — should show your session state
-3. Try `ay:ready` — should query GitHub Issues
+1. Read `.github/node-manifest.md` — should show your child node identity
+2. Read `.github/instructions/identity.instructions.md` — should see Aynorica identity
+3. Try `ay:status` — should respond with session state
 
 ---
 
-## You're Now Updated
+## Updating from Prime
 
-Welcome to the network. Your specialty is **{specialty}**.
+When Prime pushes updates to your child branch:
 
-When you learn something valuable, use `ay:leave` to create a harvest PR back to Prime.
+```powershell
+# In your aynorica-source folder
+cd C:\Users\amird\Desktop\AI\aynorica-source
+git pull origin {CHILD_BRANCH}
+
+# Re-copy to your repo
+Copy-Item -Path ".github\*" -Destination "{YOUR_REPO_PATH}\.github" -Recurse -Force
+
+# Commit the update
+cd {YOUR_REPO_PATH}
+git add .github/
+git commit -m "chore: sync with aynorica-prime"
+git push
+```
 
 ---
 
-## Example: fullstack-nextjs
+## Sending Learnings Back to Prime
 
-For a full-stack Next.js developer node:
+When you discover something valuable:
 
--   **nodeId**: `aynorica-fullstack-nextjs`
--   **specialty**: `fullstack-nextjs`
--   **Capabilities**: Next.js App Router, React Server Components, Full-stack API development
+```
+ay:leave
+```
+
+This will:
+
+1. Extract your learnings
+2. Create a harvest PR to Prime's child branch
+3. Prime can then merge and propagate to other nodes
 
 ---
 
 ## Troubleshooting
 
-| Issue                | Solution                                                  |
-| -------------------- | --------------------------------------------------------- |
-| Missing instructions | Re-copy from `aynorica-prime-source/.github/instructions` |
-| Registry parse error | Validate JSON syntax                                      |
-| Git push fails       | Check remote permissions                                  |
-| Tools not working    | Ensure VS Code has GitHub MCP configured                  |
+| Issue                   | Solution                                                |
+| ----------------------- | ------------------------------------------------------- |
+| Can't find child branch | Check `aynorica-registry.json` on Prime for branch name |
+| Missing instructions    | Re-clone and re-copy from child branch                  |
+| Identity shows Prime    | Your `node-manifest.md` wasn't updated on child branch  |
+| `ay:` commands fail     | Ensure `.github/instructions/` is present               |
+
+---
+
+## Network Topology
+
+After integration:
+
+```
+aynorica-prime (main)
+├── aynorica-hacker → WSL projects
+└── aynorica-figma-nextjs → wm-dashboard (you)
+```
+
+Welcome to the network.
