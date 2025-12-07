@@ -1,7 +1,31 @@
 # Uber Recon Summary — Phase 1 Complete
 
-**Date**: 2025-12-06
+**Date**: 2025-12-06  
+**Last Updated**: 2025-12-07  
 **Scope**: Core Uber domains
+
+---
+
+## Submission History
+
+| Report ID | Title | Status | Submitted | Closed | Notes |
+|-----------|-------|--------|-----------|--------|-------|
+| #3454674 | Account Takeover via unverified email OTP + 2FA Bypass | **Informative** | 2025-12-06 | 2025-12-07 | Uber's position: "Session required = already compromised". Does NOT accept session→permanent ATO escalation or 2FA bypass as significant. |
+
+### Lessons Learned (Report #3454674)
+
+1. **Uber requires a session-obtaining vector** — They won't accept findings that start with "attacker has session cookies"
+2. **2FA bypass alone is not enough** — They consider 2FA as defense-in-depth, not a hard requirement for account changes
+3. **Chain required** — Need XSS/CSRF/phishing to obtain session, THEN chain to ATO for acceptance
+4. **Future approach**: Find the initial access vector first, then chain with account takeover
+
+### What Would Work
+
+- XSS on any `*.uber.com` → session theft → email change → permanent ATO (full chain)
+- CSRF on email change endpoint (if no CSRF protection)
+- Subdomain takeover → cookie scope abuse → session theft → ATO
+
+---
 
 ## Asset Discovery
 
@@ -43,10 +67,16 @@
 - Passive scan: 0 findings (expected for mature program)
 - Next: Manual testing required
 
-## Next Steps (Phase 2: Hunt)
-1. [ ] Create test accounts (rider, driver, eats)
-2. [ ] Set up Burp Suite with scope
-3. [ ] Focus on IDOR in business portals
-4. [ ] Test auth flows (auth-preprod, auth-staging)
-5. [ ] Explore `arize.uberinternal.com` (AI platform)
-6. [ ] Check `blogadmin.uberinternal.com` for PHP vulns
+## Next Steps (Phase 2: Hunt — UPDATED)
+
+**Priority Shift**: Based on informative closure, focus on finding **initial access vectors**:
+
+1. [ ] **XSS hunting** — Test input reflection on business portals, error pages, search params
+2. [ ] **CSRF on sensitive endpoints** — Check if email/password change has CSRF tokens
+3. [ ] **Subdomain takeover** — Check dangling CNAMEs in `all-subdomains.txt`
+4. [ ] IDOR in business portals (`biz.uber.com`, `advertiser.uber.com`)
+5. [ ] Test auth flows (auth-preprod, auth-staging)
+6. [ ] Explore `arize.uberinternal.com` (AI platform)
+
+**Goal**: Find session-obtaining bug → chain with known ATO flow → resubmit as full chain
+
