@@ -6,7 +6,7 @@
 		"aynorica-prime": {
 			"branch": "main",
 			"parent": null,
-			"children": ["aynorica-hacker"],
+			"children": ["aynorica-hacker", "aynorica-figma-nextjs"],
 			"description": "Root node. Global knowledge, core instructions, Amir profile.",
 			"manifestPath": "node-manifest.md",
 			"created": "2025-12-06T00:00:00Z",
@@ -24,6 +24,17 @@
 			"lastSync": "2025-12-06T00:00:00Z",
 			"status": "active",
 			"projectPath": "WSL:/home/user/projects"
+		},
+		"aynorica-figma-nextjs": {
+			"branch": "aynorica-figma-nextjs",
+			"parent": "aynorica-prime",
+			"children": [],
+			"description": "Full-stack Next.js developer with Figma integration for wm-dashboard project.",
+			"manifestPath": "node-manifest.md",
+			"created": "2025-12-07T00:00:00Z",
+			"lastSync": "2025-12-07T00:00:00Z",
+			"status": "active",
+			"projectPath": "wm-dashboard"
 		}
 	},
 	"pendingMerges": []
