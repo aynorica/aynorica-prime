@@ -4,7 +4,8 @@
 
 **Parent**: aynorica-prime  
 **Children**: 0 nodes  
-**Depth**: 1
+**Depth**: 1  
+**Branch**: aynorica-hacker
 
 ---
 
@@ -28,10 +29,21 @@
 
 ## Unique Content
 
--   `methodologies/2fa-bypass-testing.md` — Comprehensive 2FA vulnerability testing
--   `methodologies/business-logic-patterns.md` — Business logic flaw identification
--   `methodologies/idor-hunting-checklist.md` — Systematic IDOR discovery
--   `prompts/bugbounty/**` — Bug bounty specific templates
+-   `instructions/hacker.instructions.md` — Core hacker identity, methodologies, checklists
+-   `prompts/security/**` — Security analysis prompts (OWASP, threat modeling, code review)
+
+---
+
+## Methodology Quick Access
+
+| Attack Type    | Location                                                       |
+| -------------- | -------------------------------------------------------------- |
+| IDOR           | `instructions/hacker.instructions.md` → IDOR Hunting Checklist |
+| 2FA Bypass     | `instructions/hacker.instructions.md` → 2FA Bypass Testing     |
+| Business Logic | `instructions/hacker.instructions.md` → Business Logic Flaws   |
+| API Security   | `instructions/hacker.instructions.md` → API Security Testing   |
+| OWASP Top 10   | `prompts/security/owasp-top10-analysis.prompt.md`              |
+| Threat Model   | `prompts/security/threat-modeling.prompt.md`                   |
 
 ---
 
@@ -43,6 +55,6 @@
 ---
 
 **Created**: 2025-12-06  
-**Last Active**: 2025-12-06  
+**Last Active**: 2025-12-07  
 **Status**: Active  
 **Project**: WSL Environment

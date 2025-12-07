@@ -53,6 +53,7 @@ Purpose: Single source of truth for roles, prompts, and instructions.
 | `disagreement-protocol.instructions.md` | Pre-argument checklist                                   |
 | `network-protocol.instructions.md`      | Node lifecycle, sync protocols, network commands         |
 | `persistent-memory.instructions.md`     | GitHub Issues as memory, session state tracking          |
+| `hacker.instructions.md`                | **[HACKER NODE]** Offensive security, bug bounty, methodologies |
 
 ---
 
