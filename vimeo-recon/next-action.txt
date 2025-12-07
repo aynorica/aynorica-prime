@@ -1,0 +1,1 @@
+Need to login to Vimeo web UI to create a test video and get fresh JWT. Opening browser context would be more efficient.

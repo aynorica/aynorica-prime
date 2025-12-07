@@ -1,0 +1,10 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   321  100   207  100   114    774    426 --:--:-- --:--:-- --:--:--  1197
+{
+    "error": "Something strange occurred. Please get in touch with the app's creator.",
+    "link": null,
+    "developer_message": "The app didn't receive the user's credentials.",
+    "error_code": 8003
+}
+401

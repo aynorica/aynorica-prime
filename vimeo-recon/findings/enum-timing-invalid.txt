@@ -1,0 +1,25 @@
+=== Test 1 - Invalid email ===
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 28241    0 28046  100   195  85906    597 --:--:-- --:--:-- --:--:-- 86628
+200 - 0.326471s
+=== Test 2 - Invalid email ===
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 28239    0 28046  100   193  79043    543 --:--:-- --:--:-- --:--:-- 79771
+200 - 0.354817s
+=== Test 3 - Invalid email ===
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100 28245    0 28046  100   199  53250    377 --:--:-- --:--:-- --:--:-- 53595100 28245    0 28046  100   199  53237    377 --:--:-- --:--:-- --:--:-- 53595
+200 - 0.526808s
+=== Test 4 - Invalid email ===
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   195    0     0  100   195      0    897 --:--:-- --:--:-- --:--:--   894100 28241    0 28046  100   195  83500    580 --:--:-- --:--:-- --:--:-- 84050
+200 - 0.335877s
+=== Test 5 - Invalid email ===
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   191    0     0  100   191      0    907 --:--:-- --:--:-- --:--:--   905100 28237    0 28046  100   191  92995    633 --:--:-- --:--:-- --:--:-- 93500
+200 - 0.301586s
